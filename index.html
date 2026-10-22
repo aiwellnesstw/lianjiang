@@ -137,6 +137,12 @@ footer a{color:#fff}
       <label class="q">電話或 LINE ID</label>
       <input type="text" name="contact" required>
 
+      <label class="q">你的場在哪個縣市？<span class="hint">（選填）</span></label>
+      <select name="county" id="county">
+        <option value="">請選擇</option>
+        <option>雲林縣</option><option>嘉義縣</option><option>嘉義市</option><option>台南市</option><option>其他縣市</option>
+      </select>
+
       <details class="opt" id="opt">
         <summary>補充資訊（選填，讓老闆更快抓到重點）</summary>
         <label class="q">大概養多少？<span class="hint">（大概就好）</span></label>
@@ -415,7 +421,7 @@ form.onsubmit = e=>{
     event:'inquiry', ts:new Date().toISOString(), sid, src:SRC, device:DEVICE,
     cats:cats.map(c=>c.name).join('、'), qty, sites:fd.get('sites')||'', products:[...picked].join('、'),
     issue:fd.get('issue')||'', name:fd.get('name'), contact:fd.get('contact'),
-    time:fd.get('time')||'', how_found:fd.get('how_found')||''
+    time:fd.get('time')||'', how_found:fd.get('how_found')||'', county:fd.get('county')||''
   };
   submitted = true;
   post(inq);                                          // 詢價單本體（後台寫進 inquiries 分頁並通知）
@@ -423,7 +429,7 @@ form.onsubmit = e=>{
   document.getElementById('preview').textContent = [
     `養什麼：${inq.cats||'未選'}`, `規模：${qty||'未填'}`,
     `有興趣產品：${inq.products||'未選'}`, `狀況：${inq.issue||'未填'}`,
-    `稱呼：${inq.name}`, `聯絡：${inq.contact}`, `時段：${inq.time}`, `怎麼知道的：${inq.how_found||'未填'}`,
+    `稱呼：${inq.name}`, `聯絡：${inq.contact}`, `縣市：${inq.county||'未填'}`, `時段：${inq.time}`, `怎麼知道的：${inq.how_found||'未填'}`,
     `（來源 ${SRC}／裝置 ${DEVICE}）`
   ].join('\n');
   e.target.style.display='none';

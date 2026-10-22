@@ -83,6 +83,11 @@ th{color:var(--muted);font-weight:600;font-size:13px}
     <div class="panel"><h2>表單卡在哪一題<span class="sub">（開始填但沒送出）</span></h2><div id="stuck"></div></div>
   </div>
 
+  <div class="cols two">
+    <div class="panel"><h2>詢價的客人在哪個縣市<span class="sub">（表單選填，沒填的不算）</span></h2><div id="county"></div></div>
+    <div class="panel"><h2>詢價的客人怎麼知道我們的<span class="sub">（表單選填）</span></h2><div id="how"></div></div>
+  </div>
+
   <div class="panel" style="margin-bottom:12px">
     <h2>詢價名單<span class="sub">（最新 8 筆，老闆跟進用）</span></h2>
     <div class="tbl"><table id="leads"></table></div>
@@ -125,6 +130,7 @@ for(let i=0;i<260;i++){
   s.asked = s.viewed && rnd()<0.28;
   s.started = (s.viewed||s.cat) && rnd()<0.36;
   s.submitted = s.started && rnd()<0.52;
+  if(s.submitted){ s.county = pick(['雲林縣','嘉義縣','台南市','嘉義市','其他縣市'],[34,28,24,6,8]); s.how = pick(['friend','boss_link','search','social','other'],[30,34,12,14,10]); }
   s.tel = rnd()<0.1 ? pick(['bar','footer'],[7,3]) : null;   // 點電話的位置
   s.cta = rnd()<0.22;
   s.stuck = s.started && !s.submitted ? pick(Object.keys(FIELDS),[9,22,8,17,6,24,6]) : null;
@@ -169,6 +175,10 @@ function render(){
   bars('cats', cnt(d,'cat'), k=>k);
   bars('dev', cnt(d,'device'), k=>k==='mobile'?'手機':'電腦');
   bars('stuck', cnt(d,'stuck'), k=>FIELDS[k], true);
+  const HOW = {friend:'朋友 / 同行介紹', boss_link:'老闆傳的連結', search:'上網搜尋', social:'FB / LINE 社群', other:'其他'};
+  const sub2 = d.filter(s=>s.submitted);
+  bars('county', cnt(sub2,'county'), k=>k);
+  bars('how', cnt(sub2,'how'), k=>HOW[k]||k);
 
   const pv = cnt(d,'viewed'), ask = {}; d.filter(s=>s.asked).forEach(s=>ask[s.viewed]=(ask[s.viewed]||0)+1);
   $('prod').innerHTML = '<tr><th>產品</th><th>看詳細</th><th>按詢價</th></tr>' + pv.slice(0,6).map(p=>`<tr><td>${esc(p[0])}</td><td>${p[1]}</td><td>${ask[p[0]]||0}</td></tr>`).join('');
@@ -194,6 +204,7 @@ const KEY = new URLSearchParams(location.hash.slice(1)).get('key');
 function buildLive(data){
   const now = Date.now(), by = {};
   data.events.forEach(e=>{ if(e['sid']) (by[e['sid']] = by[e['sid']] || []).push(e); });
+  const inqBySid = {}; data.inquiries.forEach(r=>{ inqBySid[r['sid']] = r; });   // 縣市、怎麼知道的 從詢價單來
   S = Object.values(by).map(evs=>{
     const s = {day:Math.floor((now - new Date(evs[0]['時間']).getTime())/864e5), src:evs[0]['來源']||'direct', device:evs[0]['裝置']||'mobile'};
     evs.forEach(e=>{
@@ -210,7 +221,7 @@ function buildLive(data){
         s.tel = pos || 'bar';
       }
     });
-    if(s.submitted) s.stuck = null;
+    if(s.submitted){ s.stuck = null; const q = inqBySid[evs[0]['sid']]; if(q){ s.county = q['縣市'] || ''; s.how = q['怎麼知道的'] || ''; } }
     return s;
   });
   LIVE = data.inquiries.slice().reverse().map(r=>({time:r['時間'], name:r['稱呼'], cat:r['養什麼'], prod:r['有興趣產品'], src:r['來源'], st:r['狀態']}));
