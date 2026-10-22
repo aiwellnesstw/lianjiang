@@ -238,7 +238,6 @@ const CATS = [
   {id:'bird',  name:'寵物鳥/鴿', ico:'🦜', unit:'隻'}
 ];
 const LIVE = ['牛','豬','羊'], FOWL = ['雞','鴨鵝'], BIRD = ['寵物鳥/鴿'];
-const LIC = '農牧字第 1120718129 號';
 /* 文案刻意只寫「成分、適用對象、包裝、定位」，不寫療效/預防疾病/死亡率等說法
    （飼料添加物與動物用藥宣稱有法規界線，法規查清楚前先不放） */
 const PRODUCTS = [
@@ -253,12 +252,12 @@ const PRODUCTS = [
   {n:'喜樂肝', en:'First Day', cats:FOWL, ing:'L-肉鹼、L-離胺酸、維生素 C、氯化膽鹼', pack:'1 公升 × 15 瓶／箱', d:'一日齡雛雞開口期的營養補充，飲水添加。'},
   {n:'喜樂維', en:'Vita Force', cats:[...FOWL,'牛','水產'], ing:'維生素 A / D3 / E / K3 / B 群 / C，礦物質（鉀、鈉、鈷、錳、鋅）、蛋胺酸、菸鹼酸、葉酸', pack:'1 公升 × 15 瓶／箱', d:'多種維生素與礦物質的綜合補充。'},
   {n:'喜樂熱', en:'Stress Down', cats:[...FOWL,...LIVE,'水產'], ing:'穩定型維生素 C、甜菜鹼、山梨醇', pack:'1 公升 × 15 瓶／箱', d:'高濃縮穩定型維生素 C 配方，飲水添加。'},
-  {n:'翔冠寶', en:'NEOSTRONG RESPIR', cats:BIRD, ing:'薄荷、桉樹、百里香萃取物，維生素 A / D3 / E / C', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取配方，飲水添加。'},
-  {n:'翔維寶', en:'NEOSTRONG ESSENCES', cats:BIRD, ing:'牛至精油、丁香及其他植物萃取物、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'精油與有機酸複方，換毛、繁殖期搭配使用。'},
-  {n:'翔美寶', en:'NEOSTRONG SAFE', cats:BIRD, ing:'薊與朝鮮薊萃取物、甜菜鹼、氯化膽鹼、益生元、維生素、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取加益生元配方，日常體況維持。'},
-  {n:'翔健寶', en:'NEOSTRONG CITRO', cats:BIRD, ing:'短中鏈有機酸、甘油單酯、柑橘類黃酮', pack:'250 ml／500 ml', lic:LIC, d:'有機酸配方，飲水酸化與管線清潔搭配。'},
-  {n:'翔安寶', en:'NEOSTRONG AMINO V', cats:BIRD, ing:'維生素、胺基酸、天然植物萃取', pack:'250 ml／500 ml', lic:LIC, d:'維生素加胺基酸補充，換羽、繁殖期搭配使用。'},
-  {n:'翔勇寶', en:'NEOSTRONG HEPATOPRO', cats:BIRD, ing:'護肝植物萃取、L-肉鹼、維生素 B1 / B2 / B6 / B12、泛酸鈣、菸鹼酸、甜菜鹼、氯化膽鹼、胺基酸、山梨醇', pack:'250 ml／500 ml', lic:LIC, d:'高濃度液態補充配方，運動與繁殖期的營養補充。'}
+  {n:'翔冠寶', en:'NEOSTRONG RESPIR', cats:BIRD, ing:'薄荷、桉樹、百里香萃取物，維生素 A / D3 / E / C', pack:'250 ml／500 ml', d:'植物萃取配方，飲水添加。'},
+  {n:'翔維寶', en:'NEOSTRONG ESSENCES', cats:BIRD, ing:'牛至精油、丁香及其他植物萃取物、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', d:'精油與有機酸複方，換毛、繁殖期搭配使用。'},
+  {n:'翔美寶', en:'NEOSTRONG SAFE', cats:BIRD, ing:'薊與朝鮮薊萃取物、甜菜鹼、氯化膽鹼、益生元、維生素、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', d:'植物萃取加益生元配方，日常體況維持。'},
+  {n:'翔健寶', en:'NEOSTRONG CITRO', cats:BIRD, ing:'短中鏈有機酸、甘油單酯、柑橘類黃酮', pack:'250 ml／500 ml', d:'有機酸配方，飲水酸化與管線清潔搭配。'},
+  {n:'翔安寶', en:'NEOSTRONG AMINO V', cats:BIRD, ing:'維生素、胺基酸、天然植物萃取', pack:'250 ml／500 ml', d:'維生素加胺基酸補充，換羽、繁殖期搭配使用。'},
+  {n:'翔勇寶', en:'NEOSTRONG HEPATOPRO', cats:BIRD, ing:'護肝植物萃取、L-肉鹼、維生素 B1 / B2 / B6 / B12、泛酸鈣、菸鹼酸、甜菜鹼、氯化膽鹼、胺基酸、山梨醇', pack:'250 ml／500 ml', d:'高濃度液態補充配方，運動與繁殖期的營養補充。'}
 ];
 
 // 列表右側的短標籤：雞+鴨鵝 → 家禽，牛+豬+羊 → 家畜
