@@ -48,6 +48,7 @@ h2{font-size:20px;margin:0 0 14px}
 .prow{border-bottom:1px solid var(--line)}
 .prow:last-child{border-bottom:0}
 .phead{width:100%;display:flex;align-items:center;gap:8px;background:none;border:0;padding:12px 14px;font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+.phead .th{width:40px;height:56px;object-fit:contain;flex:0 0 40px}
 .phead .nm{flex:1;min-width:0}
 .phead .nm b{font-size:16px}
 .phead .nm small{display:block;color:var(--muted);font-size:12px}
@@ -89,7 +90,7 @@ footer a{color:#fff}
     <h1>牲畜吃得對，場子才養得好</h1>
     <p>牛、豬、羊、雞、鴨鵝、水產、寵物鳥都能聊。說說你的場域狀況，老闆幫你配適合的營養添加品。</p>
     <div class="btns">
-      <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry">我要詢價</a>
+      <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="hero">我要詢價</a>
       <a class="btn btn-line" href="#" data-track="cta_line" onclick="return false">LINE 聯絡我們</a>
     </div>
     <div class="trust"><span>雲嘉南在地服務</span><span>引進歐洲・印度・韓國</span><span>可客製配方／OEM・ODM</span></div>
@@ -178,14 +179,14 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <b>聯將貿易實業有限公司</b>（King Alliance Trading Co., Ltd）<br>
-    電話：<a href="tel:0937650075" data-track="tel_click">0937-650-075</a>　｜　服務地區：雲林、嘉義、台南<br>
+    電話：<a href="tel:0937650075" data-track="tel_click" data-pos="footer">0937-650-075</a>　｜　服務地區：雲林、嘉義、台南<br>
     地址：嘉義縣鹿草鄉下潭村 127 號
   </div>
 </footer>
 
 <div class="sticky">
-  <a class="btn btn-ghost" href="tel:0937650075" data-track="tel_click">打電話</a>
-  <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry">我要詢價</a>
+  <a class="btn btn-ghost" href="tel:0937650075" data-track="tel_click" data-pos="bar">打電話</a>
+  <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="bar">我要詢價</a>
 </div>
 
 <script>
@@ -223,7 +224,8 @@ function track(event, props){
   try{ if(window.gtag) gtag('event', event, props||{}); }catch(e){}
 }
 track('page_view');
-document.querySelectorAll('[data-track]').forEach(el=>el.addEventListener('click',()=>track(el.dataset.track)));
+// data-pos 記錄是哪個位置被點（hero 首屏 / bar 手機底部列 / footer 頁尾），進「其他」欄
+document.querySelectorAll('[data-track]').forEach(el=>el.addEventListener('click',()=>track(el.dataset.track, el.dataset.pos ? {pos:el.dataset.pos} : {})));
 
 /* ===== 資料 ===== */
 // 類別與計量單位：單位跟著類別走，進後台的數字才能直接排序
@@ -280,6 +282,10 @@ fetch('weekly.json', {cache:'no-store'}).then(r=>r.ok ? r.json() : Promise.rejec
   document.getElementById('weekly').style.display = 'block';
 }).catch(()=>{});
 
+// 產品小圖（img/ 資料夾，每張約 2KB）。NEOSTRONG 六款型錄上是同一支瓶子，共用一張
+const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','抗熱 C 液劑':'electrolite-liquid','抗熱 C 散劑':'electrolite-powder','腎淨':'renal','呼順':'resporan','球淨':'cocciran','喜樂肝':'firstday','喜樂維':'vitaforce','喜樂熱':'stressdown'};
+const thumb = n => 'img/' + (IMG[n] || 'neostrong') + '.webp';
+
 /* ===== 類別（上面當篩選、表單當勾選） ===== */
 const catChips = document.getElementById('catChips');
 const checks = document.getElementById('catChecks');
@@ -310,7 +316,7 @@ function renderProducts(){
   (showAll ? list : list.slice(0,SHOW_N)).forEach(p=>{
     const row = document.createElement('div'); row.className='prow';
     row.innerHTML = `
-      <button type="button" class="phead"><span class="nm"><b>${p.n}</b><small>${p.en}</small></span><span class="tg">${tagOf(p.cats)}</span><i>＋</i></button>
+      <button type="button" class="phead"><img class="th" src="${thumb(p.n)}" alt="${p.n}" width="40" height="56" loading="lazy"><span class="nm"><b>${p.n}</b><small>${p.en}</small></span><span class="tg">${tagOf(p.cats)}</span><i>＋</i></button>
       <div class="pmore">
         <p style="margin:0 0 8px">${p.d}</p>
         <dl><dt>成分</dt><dd>${p.ing}</dd><dt>包裝</dt><dd>${p.pack}</dd>${p.lic?`<dt>字號</dt><dd>${p.lic}</dd>`:''}</dl>

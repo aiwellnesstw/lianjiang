@@ -24,7 +24,7 @@ h2{font-size:16px;margin:0 0 12px}
 .pill.on{background:var(--green);border-color:var(--green);color:#fff}
 .sample{background:#fff3cd;color:#664d03;font-size:13px;padding:8px 12px;border-radius:8px;margin:8px 0 16px}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
-@media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:720px){.kpis{grid-template-columns:repeat(3,1fr)}}
 .kpi,.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
 .kpi .v{font-size:28px;font-weight:700;line-height:1.2}
 .kpi .l{color:var(--muted);font-size:13px}
@@ -125,6 +125,8 @@ for(let i=0;i<260;i++){
   s.asked = s.viewed && rnd()<0.28;
   s.started = (s.viewed||s.cat) && rnd()<0.36;
   s.submitted = s.started && rnd()<0.52;
+  s.tel = rnd()<0.1 ? pick(['bar','footer'],[7,3]) : null;   // 點電話的位置
+  s.cta = rnd()<0.22;
   s.stuck = s.started && !s.submitted ? pick(Object.keys(FIELDS),[9,22,8,17,6,24,6]) : null;
   S.push(s);
 }
@@ -155,7 +157,9 @@ function render(){
     ['來訪人數', n, `日均 ${(n/days).toFixed(1)} 人`],
     ['詢價單', sub, '留下聯絡方式的人'],
     ['詢價轉換率', pct(sub,n), '詢價 ÷ 來訪'],
-    ['表單放棄率', pct(abandon,started), `${abandon} 人開始填但沒送出`]
+    ['表單放棄率', pct(abandon,started), `${abandon} 人開始填但沒送出`],
+    ['電話點擊', d.filter(s=>s.tel).length, `手機底部列 ${d.filter(s=>s.tel==='bar').length}・頁尾 ${d.filter(s=>s.tel==='footer').length}（點擊不等於接通）`],
+    ['按「我要詢價」', d.filter(s=>s.cta).length, '有想詢價的意願，不一定填完']
   ].map(k=>`<div class="kpi"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="n">${k[2]}</div></div>`).join('');
 
   const fun = [['進站',n],['看了產品/類別',d.filter(s=>s.viewed||s.cat).length],['開始填表',started],['送出詢價',sub]];
@@ -200,6 +204,11 @@ function buildLive(data){
       if(ev==='form_start') s.started = true;
       if(ev==='form_submit') s.submitted = true;
       if(ev==='form_abandon') s.stuck = e['欄位'];
+      if(ev==='cta_inquiry') s.cta = true;
+      if(ev==='tel_click'){
+        let pos = ''; try{ pos = JSON.parse(e['其他']||'{}').pos || ''; }catch(_){}
+        s.tel = pos || 'bar';
+      }
     });
     if(s.submitted) s.stuck = null;
     return s;
