@@ -200,7 +200,17 @@ footer a{color:#fff}
 const CFG = { ENDPOINT:'https://script.google.com/macros/s/AKfycbwocyK8chbXdbpypM1bFWzqSPckRp05xHZ364_2ZXcgn0U-k3BEU8-Vt3h1V_tai4gxcw/exec', GA_ID:'' };
 
 const qs = new URLSearchParams(location.search);
-const sid = (()=>{ try{ let s=sessionStorage.getItem('lj_sid'); if(!s){ s=Math.random().toString(36).slice(2,10); sessionStorage.setItem('lj_sid',s);} return s; }catch(e){ return 'na'; } })();
+// 訪客代號 = 這個瀏覽器的固定亂數 + 當天日期（台北時間）。
+// 同一個人同一天關掉分頁再點連結，還是同一個代號，儀表板只算 1 位來訪；隔天回來才算新的一天。
+// 以前用 sessionStorage（關分頁就換新代號），所以每開一次都被當成新訪客、數字一直疊加。
+const sid = (()=>{
+  const rnd = ()=>Math.random().toString(36).slice(2,10);
+  const day = new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Taipei'}).slice(5);   // 例如 10-23
+  let vid;
+  try{ vid = localStorage.getItem('lj_vid'); if(!vid){ vid = rnd(); localStorage.setItem('lj_vid', vid); } }
+  catch(e){ try{ vid = sessionStorage.getItem('lj_sid') || rnd(); sessionStorage.setItem('lj_sid', vid); }catch(_){ vid = 'na'; } }
+  return vid + '-' + day;
+})();
 const SRC = (()=>{
   const s = qs.get('src') || qs.get('utm_source');   // 老闆傳連結時加 ?src=boss_link 之類
   if(s) return s;
@@ -226,7 +236,11 @@ function track(event, props){
   post(Object.assign({ts:new Date().toISOString(), sid, event, src:SRC, device:DEVICE}, props||{}));
   try{ if(window.gtag) gtag('event', event, props||{}); }catch(e){}
 }
-track('page_view');
+// page_view 30 分鐘內同一個瀏覽器只記一次，避免重新整理、關了再開讓 Sheet 一直長新列
+try{
+  const last = +localStorage.getItem('lj_pv') || 0;
+  if(Date.now() - last > 30*60*1000){ track('page_view'); localStorage.setItem('lj_pv', Date.now()); }
+}catch(e){ track('page_view'); }
 // data-pos 記錄是哪個位置被點（hero 首屏 / bar 手機底部列 / footer 頁尾），進「其他」欄
 document.querySelectorAll('[data-track]').forEach(el=>el.addEventListener('click',()=>track(el.dataset.track, el.dataset.pos ? {pos:el.dataset.pos} : {})));
 

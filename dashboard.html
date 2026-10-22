@@ -154,7 +154,7 @@ function render(){
   const pct = (a,b)=> b? (a/b*100).toFixed(1)+'%' : '–';
 
   $('kpis').innerHTML = [
-    ['來訪人數', n, `日均 ${(n/days).toFixed(1)} 人`],
+    ['來訪人數', n, `日均 ${(n/days).toFixed(1)} 人（同一個瀏覽器一天只算 1 人）`],
     ['詢價單', sub, '留下聯絡方式的人'],
     ['詢價轉換率', pct(sub,n), '詢價 ÷ 來訪'],
     ['表單放棄率', pct(abandon,started), `${abandon} 人開始填但沒送出`],
