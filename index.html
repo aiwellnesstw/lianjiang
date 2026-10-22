@@ -416,7 +416,7 @@ form.onsubmit = e=>{
   const fd = new FormData(e.target);
   if(fd.get('website')) return;                       // 機器人填了隱藏欄位，直接丟掉
   const cats = ACTIVE_CATS.filter(c=>checks.querySelector(`input[value="${c.id}"]`).checked);
-  const qty = cats.map(c=>`${c.name} ${fd.get('qty_'+c.id)||'未填'} ${c.unit}`).join('、');
+  const qty = cats.filter(c=>fd.get('qty_'+c.id)).map(c=>`${c.name} ${fd.get('qty_'+c.id)} ${c.unit}`).join('、');   // 只列有填數字的
   const inq = {
     event:'inquiry', ts:new Date().toISOString(), sid, src:SRC, device:DEVICE,
     cats:cats.map(c=>c.name).join('、'), qty, sites:fd.get('sites')||'', products:[...picked].join('、'),
@@ -426,12 +426,12 @@ form.onsubmit = e=>{
   submitted = true;
   post(inq);                                          // 詢價單本體（後台寫進 inquiries 分頁並通知）
   track('form_submit',{cats:inq.cats, products:inq.products, how_found:inq.how_found});   // 漏斗事件（不含個資）
+  // 給客人看的確認內容：只列他自己填的，不顯示來源、裝置這類內部資料，也不顯示「未填」
+  const howTxt = inq.how_found ? document.getElementById('howFound').selectedOptions[0].textContent : '';
   document.getElementById('preview').textContent = [
-    `養什麼：${inq.cats||'未選'}`, `規模：${qty||'未填'}`,
-    `有興趣產品：${inq.products||'未選'}`, `狀況：${inq.issue||'未填'}`,
-    `稱呼：${inq.name}`, `聯絡：${inq.contact}`, `縣市：${inq.county||'未填'}`, `時段：${inq.time}`, `怎麼知道的：${inq.how_found||'未填'}`,
-    `（來源 ${SRC}／裝置 ${DEVICE}）`
-  ].join('\n');
+    ['養什麼', inq.cats], ['規模', qty], ['有興趣產品', inq.products], ['狀況', inq.issue],
+    ['稱呼', inq.name], ['聯絡', inq.contact], ['縣市', inq.county], ['方便時段', inq.time], ['怎麼知道我們的', howTxt]
+  ].filter(r=>r[1]).map(r=>`${r[0]}：${r[1]}`).join('\n');
   e.target.style.display='none';
   document.getElementById('thanks').style.display='block';
 };
