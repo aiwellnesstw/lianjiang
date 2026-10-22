@@ -43,6 +43,8 @@ th{color:var(--muted);font-weight:600;font-size:13px}
 .st{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px}
 .st.new{background:#fde8d3;color:#8a4b12}.st.contact{background:#e3ecf8;color:#24477a}.st.quote{background:#efe6f7;color:#58307a}.st.won{background:#dcefd3;color:#2d5a22}
 .tbl{overflow-x:auto}
+/* 名單欄位多，手機上寧可左右滑動，也不要讓字被擠成一個字一行 */
+#leads th,#leads td{white-space:nowrap;padding-right:16px}
 .flow{display:grid;gap:8px}
 @media(min-width:720px){.flow{grid-template-columns:repeat(5,1fr)}}
 .node{border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px;background:#fbfaf6;position:relative}
