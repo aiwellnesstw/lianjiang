@@ -287,13 +287,15 @@ const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','�
 const thumb = n => 'img/' + (IMG[n] || 'neostrong') + '.webp';
 
 /* ===== 類別（上面當篩選、表單當勾選） ===== */
+// 沒有對應產品的牲畜先不顯示（之後新增產品時，對應的牲畜會自動出現，不用改這裡）
+const ACTIVE_CATS = CATS.filter(c => PRODUCTS.some(p => p.cats.includes(c.name)));
 const catChips = document.getElementById('catChips');
 const checks = document.getElementById('catChecks');
 let curFilter = '全部', showAll = false;
 
 const mk = (label, on, fn)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'+(on?' on':''); b.textContent=label; b.onclick=fn; return b; };
 catChips.appendChild(mk('全部', true, ()=>{ track('filter_click',{cat:'全部'}); setFilter('全部'); }));
-CATS.forEach(c=>{
+ACTIVE_CATS.forEach(c=>{
   catChips.appendChild(mk(`${c.ico} ${c.name}`, false, ()=>{ track('cat_click',{cat:c.name}); tick(c.id); setFilter(c.name); }));
   const l = document.createElement('label');
   l.className='chip'; l.style.display='inline-flex'; l.style.alignItems='center'; l.style.gap='6px';
@@ -390,7 +392,7 @@ form.onsubmit = e=>{
   e.preventDefault();
   const fd = new FormData(e.target);
   if(fd.get('website')) return;                       // 機器人填了隱藏欄位，直接丟掉
-  const cats = CATS.filter(c=>checks.querySelector(`input[value="${c.id}"]`).checked);
+  const cats = ACTIVE_CATS.filter(c=>checks.querySelector(`input[value="${c.id}"]`).checked);
   const qty = cats.map(c=>`${c.name} ${fd.get('qty_'+c.id)||'未填'} ${c.unit}`).join('、');
   const inq = {
     event:'inquiry', ts:new Date().toISOString(), sid, src:SRC, device:DEVICE,
