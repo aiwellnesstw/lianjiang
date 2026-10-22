@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 內容安全政策：只允許連到 Apps Script 後台，頁面被塞進外部腳本也連不出去。之後要裝 GA4 要把 googletagmanager / google-analytics 加進 script-src 與 connect-src -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <title>聯將貿易實業有限公司｜畜禽水產營養與場域諮詢</title>
 <meta name="description" content="聯將貿易實業有限公司：牛、豬、羊、雞、鴨鵝、水產與寵物鳥/鴿的營養添加品，可依場域詢價與諮詢。">
 <style>
@@ -34,6 +34,12 @@ h2{font-size:20px;margin:0 0 14px}
 .trust span{font-size:13px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 12px;color:var(--green-dark)}
 .boss{display:flex;gap:12px;align-items:center;margin-top:16px;font-size:14px;color:var(--muted)}
 .boss .photo{flex:0 0 52px;height:52px;border-radius:50%;background:#d9d3c2;display:flex;align-items:center;justify-content:center;font-size:10px;text-align:center;line-height:1.2}
+.wk{background:#fffdf5;border:1px solid #eadfb8;border-radius:12px;padding:14px 16px}
+.wk-h{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#8a6d1f;margin-bottom:4px}
+.wk h3{margin:0 0 6px;font-size:17px}
+.wk ul{margin:0;padding-left:20px;font-size:15px}
+.wk li{margin:3px 0}
+.wk-src{margin:8px 0 0;font-size:12px;color:var(--muted)}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font-size:15px;cursor:pointer;font-family:inherit;color:var(--ink)}
 .chip:hover{border-color:var(--green)}
@@ -92,6 +98,17 @@ footer a{color:#fff}
     </div>
   </div>
 </header>
+
+<section id="weekly" style="display:none;padding:20px 0 0">
+  <div class="wrap">
+    <div class="wk">
+      <div class="wk-h"><b>本週場域提醒</b><span id="wkDate"></span></div>
+      <h3 id="wkTitle"></h3>
+      <ul id="wkList"></ul>
+      <p class="wk-src" id="wkSrc"></p>
+    </div>
+  </div>
+</section>
 
 <section id="productSec">
   <div class="wrap">
@@ -226,16 +243,16 @@ const LIC = '農牧字第 1120718129 號';
    （飼料添加物與動物用藥宣稱有法規界線，法規查清楚前先不放） */
 const PRODUCTS = [
   {n:'清毒康', en:'ToxiZero Plus', cats:[...FOWL,...LIVE,'水產'], ing:'釀酒酵母、矽藻土、牛磺酸', pack:'粉劑　25 公斤／袋', d:'酵母加矽藻土的複合配方，混入日常飼料使用。'},
-  {n:'肝淨', en:'Heparan DS', cats:[...FOWL,...LIVE], ing:'山梨醇、穿心蓮、維生素 B12、肌醇、甜菜鹼、氯化膽鹼、蛋胺酸、離胺酸等', pack:'1 公升', d:'肝臟營養補充配方，飲水添加。'},
+  {n:'肝淨', en:'Heparan DS', cats:[...FOWL,...LIVE], ing:'山梨醇、穿心蓮、維生素 B12、肌醇、甜菜鹼、氯化膽鹼、蛋胺酸、離胺酸等', pack:'1 公升', d:'山梨醇、穿心蓮、維生素 B12 等成分的複合配方，飲水添加。'},
   {n:'腸安酸', en:'Ranacid', cats:[...FOWL,...LIVE], ing:'甲酸、丙酸、醋酸、乳酸、檸檬酸', pack:'1 公升／5 公升', d:'多重複合有機酸，飲水酸化管理搭配。'},
-  {n:'抗熱 C 液劑', en:'Ran Electrolite-C', cats:[...FOWL,...LIVE], ing:'氯化鈉、氯化鉀、硫酸鎂、乳酸鈣、檸檬酸鈉、維生素 C、葡萄糖', pack:'500 mL／1 公升', d:'電解質加維生素 C，夏季高溫期搭配使用。'},
+  {n:'抗熱 C 液劑', en:'Ran Electrolite-C', cats:[...FOWL,...LIVE], ing:'氯化鈉、氯化鉀、硫酸鎂、乳酸鈣、檸檬酸鈉、維生素 C、葡萄糖', pack:'500 mL／1 公升', d:'電解質加維生素 C 的複合配方，飲水添加。'},
   {n:'抗熱 C 散劑', en:'Ran Electrolite-C Powder', cats:[...FOWL,...LIVE], ing:'氯化鈉、氯化鉀、硫酸鎂、乳酸鈣、檸檬酸鈉、維生素 C、葡萄糖', pack:'粉劑　1 公斤', d:'粉劑型電解質配方，溶解度高，可搭配自動給水系統。'},
   {n:'腎淨', en:'Renal Clean', cats:FOWL, ing:'天門冬、岩白菜、沙梨木、心葉青牛膽、荔枝草、香附子', pack:'1 公升', d:'天然草本複方，家禽用。'},
   {n:'呼順', en:'Resporan', cats:[...FOWL,...LIVE], ing:'尤加利、百里香、薄荷醇、樟腦、聖羅勒', pack:'500 mL／1 公升', d:'草本植物精油配方，飲水添加。'},
   {n:'球淨', en:'Cocciran', cats:FOWL, ing:'石榴、木橘、心葉青牛膽、兒茶樹、木棉樹、印度小檗、香附子、治痢木、阿育芹', pack:'500 mL／1 公升', d:'天然植物複合配方，家禽用。'},
   {n:'喜樂肝', en:'First Day', cats:FOWL, ing:'L-肉鹼、L-離胺酸、維生素 C、氯化膽鹼', pack:'1 公升 × 15 瓶／箱', d:'一日齡雛雞開口期的營養補充，飲水添加。'},
   {n:'喜樂維', en:'Vita Force', cats:[...FOWL,'牛','水產'], ing:'維生素 A / D3 / E / K3 / B 群 / C，礦物質（鉀、鈉、鈷、錳、鋅）、蛋胺酸、菸鹼酸、葉酸', pack:'1 公升 × 15 瓶／箱', d:'多種維生素與礦物質的綜合補充。'},
-  {n:'喜樂熱', en:'Stress Down', cats:[...FOWL,...LIVE,'水產'], ing:'穩定型維生素 C、甜菜鹼、山梨醇', pack:'1 公升 × 15 瓶／箱', d:'高濃縮穩定型維生素 C，夏季高溫期搭配使用。'},
+  {n:'喜樂熱', en:'Stress Down', cats:[...FOWL,...LIVE,'水產'], ing:'穩定型維生素 C、甜菜鹼、山梨醇', pack:'1 公升 × 15 瓶／箱', d:'高濃縮穩定型維生素 C 配方，飲水添加。'},
   {n:'翔冠寶', en:'NEOSTRONG RESPIR', cats:BIRD, ing:'薄荷、桉樹、百里香萃取物，維生素 A / D3 / E / C', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取配方，飲水添加。'},
   {n:'翔維寶', en:'NEOSTRONG ESSENCES', cats:BIRD, ing:'牛至精油、丁香及其他植物萃取物、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'精油與有機酸複方，換毛、繁殖期搭配使用。'},
   {n:'翔美寶', en:'NEOSTRONG SAFE', cats:BIRD, ing:'薊與朝鮮薊萃取物、甜菜鹼、氯化膽鹼、益生元、維生素、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取加益生元配方，日常體況維持。'},
@@ -252,6 +269,17 @@ function tagOf(cats){
   p.push(...cats.filter(c=>!FOWL.includes(c) && !LIVE.includes(c)));
   return p.join('・');
 }
+
+/* ===== 本週場域提醒：內容在 weekly.json，每週只改那個檔，不用動這支程式 =====
+   一律用 textContent 塞字，不用 innerHTML，檔案被改壞也不會執行任何東西 */
+fetch('weekly.json', {cache:'no-store'}).then(r=>r.ok ? r.json() : Promise.reject()).then(w=>{
+  if(!w || !w.title || !Array.isArray(w.bullets) || !w.bullets.length) return;
+  document.getElementById('wkDate').textContent = w.period || '';
+  document.getElementById('wkTitle').textContent = w.title;
+  document.getElementById('wkList').replaceChildren(...w.bullets.slice(0,4).map(t=>{ const li=document.createElement('li'); li.textContent=t; return li; }));
+  document.getElementById('wkSrc').textContent = w.source ? '資料來源：' + w.source : '';
+  document.getElementById('weekly').style.display = 'block';
+}).catch(()=>{});
 
 /* ===== 類別（上面當篩選、表單當勾選） ===== */
 const catChips = document.getElementById('catChips');
