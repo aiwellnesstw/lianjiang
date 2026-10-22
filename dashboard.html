@@ -183,19 +183,19 @@ function render(){
   const pv = cnt(d,'viewed'), ask = {}; d.filter(s=>s.asked).forEach(s=>ask[s.viewed]=(ask[s.viewed]||0)+1);
   $('prod').innerHTML = '<tr><th>產品</th><th>看詳細</th><th>按詢價</th></tr>' + pv.slice(0,6).map(p=>`<tr><td>${esc(p[0])}</td><td>${p[1]}</td><td>${ask[p[0]]||0}</td></tr>`).join('');
 
-  const head = '<tr><th>時間</th><th>稱呼</th><th>養什麼</th><th>有興趣產品</th><th>來源</th><th>狀態</th></tr>';
+  const head = '<tr><th>時間</th><th>稱呼</th><th>養什麼</th><th>有興趣產品</th><th>縣市</th><th>狀態</th></tr>';
   const empty = '<tr><td colspan="6" class="sub">這段期間沒有詢價單</td></tr>';
   if(LIVE){
     const CLS = {'新進':'new','已聯絡':'contact','已報價':'quote','成交':'won'};
     $('leads').innerHTML = head + (LIVE.slice(0,8).map(r=>{
       const t = new Date(r.time);
-      return `<tr><td>${t.getMonth()+1}/${t.getDate()}</td><td>${esc(r.name)}</td><td>${esc(r.cat||'–')}</td><td>${esc(r.prod||'未選')}</td><td>${esc(SRCS[r.src]||r.src||'–')}</td><td><span class="st ${CLS[r.st]||'new'}">${esc(r.st||'新進')}</span></td></tr>`;
+      return `<tr><td>${t.getMonth()+1}/${t.getDate()}</td><td>${esc(r.name)}</td><td>${esc(r.cat||'–')}</td><td>${esc(r.prod||'未選')}</td><td>${esc(r.county||'未填')}</td><td><span class="st ${CLS[r.st]||'new'}">${esc(r.st||'新進')}</span></td></tr>`;
     }).join('') || empty);
     return;
   }
   const L = d.filter(s=>s.submitted).slice(0,8);
   $('leads').innerHTML = head +
-    (L.map((s,i)=>`<tr><td>10/${22-s.day}</td><td>${LEAD_NAMES[i%8]}（示範）</td><td>${s.cat||'雞'}</td><td>${s.viewed||'未選'}</td><td>${SRCS[s.src]}</td><td><span class="st ${LEAD_ST[i%8]}">${ST_TXT[LEAD_ST[i%8]]}</span></td></tr>`).join('') || empty);
+    (L.map((s,i)=>`<tr><td>10/${22-s.day}</td><td>${LEAD_NAMES[i%8]}（示範）</td><td>${s.cat||'雞'}</td><td>${s.viewed||'未選'}</td><td>${s.county||'未填'}</td><td><span class="st ${LEAD_ST[i%8]}">${ST_TXT[LEAD_ST[i%8]]}</span></td></tr>`).join('') || empty);
 }
 
 /* ===== 接上後台：API 填 Apps Script 網址，金鑰放網址 # 後面（dashboard.html#key=xxx），不寫進檔案 ===== */
@@ -224,7 +224,7 @@ function buildLive(data){
     if(s.submitted){ s.stuck = null; const q = inqBySid[evs[0]['sid']]; if(q){ s.county = q['縣市'] || ''; s.how = q['怎麼知道的'] || ''; } }
     return s;
   });
-  LIVE = data.inquiries.slice().reverse().map(r=>({time:r['時間'], name:r['稱呼'], cat:r['養什麼'], prod:r['有興趣產品'], src:r['來源'], st:r['狀態']}));
+  LIVE = data.inquiries.slice().reverse().map(r=>({time:r['時間'], name:r['稱呼'], cat:r['養什麼'], prod:r['有興趣產品'], src:r['來源'], county:r['縣市'], st:r['狀態']}));
 }
 if(API && KEY){
   S = [];   // 有金鑰就別先秀示範數字，避免老闆把亂數當真；後台第一次喚醒可能要 10 秒左右
