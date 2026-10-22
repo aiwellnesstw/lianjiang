@@ -142,8 +142,11 @@ footer a{color:#fff}
         <label class="q">大概養多少？<span class="hint">（大概就好）</span></label>
         <div id="numFields"><p class="hint" style="margin:0">先勾選上面的種類，這裡會出現對應欄位</p></div>
 
-        <label class="q">養殖場有幾個？</label>
-        <div class="numrow"><input type="number" inputmode="numeric" min="0" name="sites" placeholder="例如 2"><span class="un">場</span></div>
+        <!-- 「養殖場有幾個」先隱藏；要恢復就拿掉下面這個 div 的 hidden -->
+        <div hidden>
+          <label class="q">養殖場有幾個？</label>
+          <div class="numrow"><input type="number" inputmode="numeric" min="0" name="sites" placeholder="例如 2"><span class="un">場</span></div>
+        </div>
 
         <label class="q">目前遇到什麼狀況？</label>
         <textarea name="issue" placeholder="例如：換季後食慾變差、想換配方…"></textarea>
@@ -404,7 +407,7 @@ form.onsubmit = e=>{
   post(inq);                                          // 詢價單本體（後台寫進 inquiries 分頁並通知）
   track('form_submit',{cats:inq.cats, products:inq.products, how_found:inq.how_found});   // 漏斗事件（不含個資）
   document.getElementById('preview').textContent = [
-    `養什麼：${inq.cats||'未選'}`, `規模：${qty||'未填'}`, `場數：${inq.sites||'未填'}`,
+    `養什麼：${inq.cats||'未選'}`, `規模：${qty||'未填'}`,
     `有興趣產品：${inq.products||'未選'}`, `狀況：${inq.issue||'未填'}`,
     `稱呼：${inq.name}`, `聯絡：${inq.contact}`, `時段：${inq.time}`, `怎麼知道的：${inq.how_found||'未填'}`,
     `（來源 ${SRC}／裝置 ${DEVICE}）`
