@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 內容安全政策：只允許連到 Apps Script 後台，頁面被塞進外部腳本也連不出去。之後要裝 GA4 要把 googletagmanager / google-analytics 加進 script-src 與 connect-src -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<title>聯將貿易實業有限公司｜畜禽水產營養與場域諮詢</title>
+<meta name="description" content="聯將貿易實業有限公司：牛、豬、羊、雞、鴨鵝、水產與寵物鳥/鴿的營養添加品，可依場域詢價與諮詢。">
+<style>
+:root{
+  --bg:#faf8f3; --card:#ffffff; --ink:#2b2a26; --muted:#6e6a5e;
+  --green:#3f6b3a; --green-dark:#2d4f2a; --line:#e4dfd2; --accent:#c8873a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.65;font-size:16px;padding-bottom:72px}
+@media(min-width:768px){body{padding-bottom:0}}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+section{padding:28px 0}
+h1{font-size:27px;line-height:1.35;margin:0 0 10px}
+h2{font-size:20px;margin:0 0 14px}
+.hero{background:linear-gradient(160deg,#e8efdc,#faf8f3);padding:32px 0 24px}
+.hero .co{font-size:13px;color:var(--green-dark);font-weight:600;margin-bottom:6px;letter-spacing:.5px}
+.hero p{color:var(--muted);margin:0 0 18px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-family:inherit;text-align:center}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-sm{padding:7px 14px;font-size:14px;border-radius:8px}
+.btn-ghost{background:#fff;color:var(--green-dark);border:1px solid var(--green)}
+/* LINE 按鈕先保留、不顯示：要開時把下面這行的 display:none 刪掉 */
+.btn-line{background:#06c755;color:#fff;display:none}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.trust span{font-size:13px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 12px;color:var(--green-dark)}
+.boss{display:flex;gap:12px;align-items:center;margin-top:16px;font-size:14px;color:var(--muted)}
+.boss .photo{flex:0 0 52px;height:52px;border-radius:50%;background:#d9d3c2;display:flex;align-items:center;justify-content:center;font-size:10px;text-align:center;line-height:1.2}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font-size:15px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.chip:hover{border-color:var(--green)}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.plist{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+.prow{border-bottom:1px solid var(--line)}
+.prow:last-child{border-bottom:0}
+.phead{width:100%;display:flex;align-items:center;gap:8px;background:none;border:0;padding:12px 14px;font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+.phead .nm{flex:1;min-width:0}
+.phead .nm b{font-size:16px}
+.phead .nm small{display:block;color:var(--muted);font-size:12px}
+.phead .tg{font-size:12px;color:var(--green-dark);background:#eef3e6;border-radius:99px;padding:2px 10px;white-space:nowrap}
+.phead i{font-style:normal;color:var(--muted);width:16px;text-align:center}
+.pmore{display:none;padding:0 14px 14px;font-size:14px;color:var(--muted)}
+.prow.open .pmore{display:block}
+.pmore dl{margin:0 0 10px;display:grid;grid-template-columns:44px 1fr;gap:2px 8px}
+.pmore dt{color:var(--muted)}.pmore dd{margin:0;color:var(--ink)}
+.showall{display:block;width:100%;background:#fbfaf6;border:0;border-top:1px solid var(--line);padding:12px;font:inherit;color:var(--green-dark);cursor:pointer;font-weight:600}
+.hint{font-weight:400;color:var(--muted);font-size:14px}
+form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+label.q{display:block;font-weight:600;margin:16px 0 8px}
+label.q:first-of-type{margin-top:0}
+input[type=text],input[type=tel],input[type=number],textarea,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;background:#fff}
+textarea{min-height:76px;resize:vertical}
+.numrow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.numrow span.nm{flex:0 0 84px;font-size:15px}
+.numrow span.un{color:var(--muted);font-size:14px}
+.numrow input{flex:1}
+details.opt{margin-top:16px;border-top:1px dashed var(--line);padding-top:12px}
+details.opt summary{cursor:pointer;color:var(--green-dark);font-weight:600}
+#picked .tag{display:inline-block;font-size:13px;background:#fff3e0;color:#7a4a10;padding:2px 10px;border-radius:99px;margin:0 6px 6px 0;cursor:pointer}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+#thanks{display:none;background:#eef3e6;border:1px solid #c9d9b4;border-radius:12px;padding:20px}
+#thanks pre{white-space:pre-wrap;font-family:inherit;background:#fff;border-radius:8px;padding:12px;font-size:14px}
+footer{background:#2b2a26;color:#d8d4c6;padding:24px 0;font-size:14px}
+footer a{color:#fff}
+.draft{background:#fff3cd;color:#664d03;font-size:12px;text-align:center;padding:5px}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:9;background:#fff;border-top:1px solid var(--line);padding:10px 12px;display:flex;gap:10px}
+.sticky .btn{flex:1;padding:12px 8px}
+@media(min-width:768px){.sticky{display:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="co">聯將貿易實業有限公司　King Alliance Trading Co., Ltd</div>
+    <h1>牲畜吃得對，場子才養得好</h1>
+    <p>牛、豬、羊、雞、鴨鵝、水產、寵物鳥都能聊。說說你的場域狀況，老闆幫你配適合的營養添加品。</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry">我要詢價</a>
+      <a class="btn btn-line" href="#" data-track="cta_line" onclick="return false">LINE 聯絡我們</a>
+    </div>
+    <div class="trust"><span>雲嘉南在地服務</span><span>引進歐洲・印度・韓國</span><span>可客製配方／OEM・ODM</span></div>
+    <div class="boss">
+      <div>老闆親自接電話、親自回覆，歡迎直接來電或留下資料。</div>
+    </div>
+  </div>
+</header>
+
+<section id="productSec">
+  <div class="wrap">
+    <h2>你養的是哪一種？</h2>
+    <div class="chips" id="catChips"></div>
+    <div class="plist" id="plist"></div>
+  </div>
+</section>
+
+<section id="inquiry" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <h2>詢價 / 諮詢</h2>
+    <form id="f" autocomplete="off">
+      <label class="q">你養的是什麼？<span class="hint">（可複選）</span></label>
+      <div class="chips" id="catChecks"></div>
+
+      <div id="pickedBox" style="display:none">
+        <label class="q">你有興趣的產品<span class="hint">（點一下可移除）</span></label>
+        <div id="picked"></div>
+      </div>
+
+      <label class="q">怎麼稱呼你？</label>
+      <input type="text" name="name" required>
+
+      <label class="q">電話或 LINE ID</label>
+      <input type="text" name="contact" required>
+
+      <details class="opt" id="opt">
+        <summary>補充資訊（選填，讓老闆更快抓到重點）</summary>
+        <label class="q">大概養多少？<span class="hint">（大概就好）</span></label>
+        <div id="numFields"><p class="hint" style="margin:0">先勾選上面的種類，這裡會出現對應欄位</p></div>
+
+        <label class="q">養殖場有幾個？</label>
+        <div class="numrow"><input type="number" inputmode="numeric" min="0" name="sites" placeholder="例如 2"><span class="un">場</span></div>
+
+        <label class="q">目前遇到什麼狀況？</label>
+        <textarea name="issue" placeholder="例如：換季後食慾變差、想換配方…"></textarea>
+
+        <label class="q">方便什麼時段聯絡？</label>
+        <select name="time">
+          <option>都可以</option><option>上午</option><option>下午</option><option>晚上</option>
+        </select>
+
+        <label class="q">你怎麼知道我們的？</label>
+        <select name="how_found" id="howFound">
+          <option value="">請選擇</option>
+          <option value="friend">朋友 / 同行介紹</option>
+          <option value="boss_link">老闆傳給我的連結</option>
+          <option value="search">上網搜尋</option>
+          <option value="social">Facebook / LINE 社群</option>
+          <option value="other">其他</option>
+        </select>
+      </details>
+
+      <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;margin-top:20px">送出詢價</button>
+      <p class="hint" style="margin:10px 0 0;font-size:13px">送出即表示你同意聯將貿易實業有限公司使用你留下的資料，作為聯絡報價與產品諮詢之用，不會提供給無關的第三方。想查詢或刪除資料，請來電 0937-650-075。</p>
+    </form>
+    <div id="thanks">
+      <b>收到了！老闆會盡快聯絡你。</b>
+      <p class="hint">你送出的內容：</p>
+      <pre id="preview"></pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>聯將貿易實業有限公司</b>（King Alliance Trading Co., Ltd）<br>
+    電話：<a href="tel:0937650075" data-track="tel_click">0937-650-075</a>　｜　服務地區：雲林、嘉義、台南<br>
+    地址：嘉義縣鹿草鄉下潭村 127 號
+  </div>
+</footer>
+
+<div class="sticky">
+  <a class="btn btn-ghost" href="tel:0937650075" data-track="tel_click">打電話</a>
+  <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry">我要詢價</a>
+</div>
+
+<script>
+/* ===== 追蹤設定 =====
+   ENDPOINT：Apps Script 網頁應用程式網址（見 backend/README.md），填了事件和詢價單就會寫進 Google Sheet
+   GA_ID：選填，GA4 衡量 ID（G-XXXXXXX）
+   兩個都空著 = 只在瀏覽器 console 印出，不送任何資料 */
+const CFG = { ENDPOINT:'https://script.google.com/macros/s/AKfycbwocyK8chbXdbpypM1bFWzqSPckRp05xHZ364_2ZXcgn0U-k3BEU8-Vt3h1V_tai4gxcw/exec', GA_ID:'' };
+
+const qs = new URLSearchParams(location.search);
+const sid = (()=>{ try{ let s=sessionStorage.getItem('lj_sid'); if(!s){ s=Math.random().toString(36).slice(2,10); sessionStorage.setItem('lj_sid',s);} return s; }catch(e){ return 'na'; } })();
+const SRC = (()=>{
+  const s = qs.get('src') || qs.get('utm_source');   // 老闆傳連結時加 ?src=boss_link 之類
+  if(s) return s;
+  try{ return document.referrer ? new URL(document.referrer).hostname : 'direct'; }catch(e){ return 'direct'; }
+})();
+const DEVICE = matchMedia('(max-width:767px)').matches ? 'mobile' : 'desktop';
+
+if(CFG.GA_ID){
+  const g = document.createElement('script'); g.async = true;
+  g.src = 'https://www.googletagmanager.com/gtag/js?id=' + CFG.GA_ID; document.head.appendChild(g);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date()); gtag('config', CFG.GA_ID);
+}
+
+function post(row){
+  try{
+    if(CFG.ENDPOINT) navigator.sendBeacon(CFG.ENDPOINT, JSON.stringify(row));
+    else console.debug('[send]', row);
+  }catch(e){}
+}
+function track(event, props){
+  post(Object.assign({ts:new Date().toISOString(), sid, event, src:SRC, device:DEVICE}, props||{}));
+  try{ if(window.gtag) gtag('event', event, props||{}); }catch(e){}
+}
+track('page_view');
+document.querySelectorAll('[data-track]').forEach(el=>el.addEventListener('click',()=>track(el.dataset.track)));
+
+/* ===== 資料 ===== */
+// 類別與計量單位：單位跟著類別走，進後台的數字才能直接排序
+const CATS = [
+  {id:'cow',   name:'牛',   ico:'🐄', unit:'頭'},
+  {id:'pig',   name:'豬',   ico:'🐖', unit:'頭'},
+  {id:'sheep', name:'羊',   ico:'🐐', unit:'頭'},
+  {id:'horse', name:'馬',   ico:'🐎', unit:'匹'},
+  {id:'chick', name:'雞',   ico:'🐔', unit:'隻'},
+  {id:'duck',  name:'鴨鵝', ico:'🦆', unit:'隻'},
+  {id:'fish',  name:'水產', ico:'🐟', unit:'分地'},
+  {id:'bird',  name:'寵物鳥/鴿', ico:'🦜', unit:'隻'}
+];
+const LIVE = ['牛','豬','羊'], FOWL = ['雞','鴨鵝'], BIRD = ['寵物鳥/鴿'];
+const LIC = '農牧字第 1120718129 號';
+/* 文案刻意只寫「成分、適用對象、包裝、定位」，不寫療效/預防疾病/死亡率等說法
+   （飼料添加物與動物用藥宣稱有法規界線，法規查清楚前先不放） */
+const PRODUCTS = [
+  {n:'清毒康', en:'ToxiZero Plus', cats:[...FOWL,...LIVE,'水產'], ing:'釀酒酵母、矽藻土、牛磺酸', pack:'粉劑　25 公斤／袋', d:'酵母加矽藻土的複合配方，混入日常飼料使用。'},
+  {n:'肝淨', en:'Heparan DS', cats:[...FOWL,...LIVE], ing:'山梨醇、穿心蓮、維生素 B12、肌醇、甜菜鹼、氯化膽鹼、蛋胺酸、離胺酸等', pack:'1 公升', d:'肝臟營養補充配方，飲水添加。'},
+  {n:'腸安酸', en:'Ranacid', cats:[...FOWL,...LIVE], ing:'甲酸、丙酸、醋酸、乳酸、檸檬酸', pack:'1 公升／5 公升', d:'多重複合有機酸，飲水酸化管理搭配。'},
+  {n:'抗熱 C 液劑', en:'Ran Electrolite-C', cats:[...FOWL,...LIVE], ing:'氯化鈉、氯化鉀、硫酸鎂、乳酸鈣、檸檬酸鈉、維生素 C、葡萄糖', pack:'500 mL／1 公升', d:'電解質加維生素 C，夏季高溫期搭配使用。'},
+  {n:'抗熱 C 散劑', en:'Ran Electrolite-C Powder', cats:[...FOWL,...LIVE], ing:'氯化鈉、氯化鉀、硫酸鎂、乳酸鈣、檸檬酸鈉、維生素 C、葡萄糖', pack:'粉劑　1 公斤', d:'粉劑型電解質配方，溶解度高，可搭配自動給水系統。'},
+  {n:'腎淨', en:'Renal Clean', cats:FOWL, ing:'天門冬、岩白菜、沙梨木、心葉青牛膽、荔枝草、香附子', pack:'1 公升', d:'天然草本複方，家禽用。'},
+  {n:'呼順', en:'Resporan', cats:[...FOWL,...LIVE], ing:'尤加利、百里香、薄荷醇、樟腦、聖羅勒', pack:'500 mL／1 公升', d:'草本植物精油配方，飲水添加。'},
+  {n:'球淨', en:'Cocciran', cats:FOWL, ing:'石榴、木橘、心葉青牛膽、兒茶樹、木棉樹、印度小檗、香附子、治痢木、阿育芹', pack:'500 mL／1 公升', d:'天然植物複合配方，家禽用。'},
+  {n:'喜樂肝', en:'First Day', cats:FOWL, ing:'L-肉鹼、L-離胺酸、維生素 C、氯化膽鹼', pack:'1 公升 × 15 瓶／箱', d:'一日齡雛雞開口期的營養補充，飲水添加。'},
+  {n:'喜樂維', en:'Vita Force', cats:[...FOWL,'牛','水產'], ing:'維生素 A / D3 / E / K3 / B 群 / C，礦物質（鉀、鈉、鈷、錳、鋅）、蛋胺酸、菸鹼酸、葉酸', pack:'1 公升 × 15 瓶／箱', d:'多種維生素與礦物質的綜合補充。'},
+  {n:'喜樂熱', en:'Stress Down', cats:[...FOWL,...LIVE,'水產'], ing:'穩定型維生素 C、甜菜鹼、山梨醇', pack:'1 公升 × 15 瓶／箱', d:'高濃縮穩定型維生素 C，夏季高溫期搭配使用。'},
+  {n:'翔冠寶', en:'NEOSTRONG RESPIR', cats:BIRD, ing:'薄荷、桉樹、百里香萃取物，維生素 A / D3 / E / C', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取配方，飲水添加。'},
+  {n:'翔維寶', en:'NEOSTRONG ESSENCES', cats:BIRD, ing:'牛至精油、丁香及其他植物萃取物、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'精油與有機酸複方，換毛、繁殖期搭配使用。'},
+  {n:'翔美寶', en:'NEOSTRONG SAFE', cats:BIRD, ing:'薊與朝鮮薊萃取物、甜菜鹼、氯化膽鹼、益生元、維生素、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', lic:LIC, d:'植物萃取加益生元配方，日常體況維持。'},
+  {n:'翔健寶', en:'NEOSTRONG CITRO', cats:BIRD, ing:'短中鏈有機酸、甘油單酯、柑橘類黃酮', pack:'250 ml／500 ml', lic:LIC, d:'有機酸配方，飲水酸化與管線清潔搭配。'},
+  {n:'翔安寶', en:'NEOSTRONG AMINO V', cats:BIRD, ing:'維生素、胺基酸、天然植物萃取', pack:'250 ml／500 ml', lic:LIC, d:'維生素加胺基酸補充，換羽、繁殖期搭配使用。'},
+  {n:'翔勇寶', en:'NEOSTRONG HEPATOPRO', cats:BIRD, ing:'護肝植物萃取、L-肉鹼、維生素 B1 / B2 / B6 / B12、泛酸鈣、菸鹼酸、甜菜鹼、氯化膽鹼、胺基酸、山梨醇', pack:'250 ml／500 ml', lic:LIC, d:'高濃度液態補充配方，運動與繁殖期的營養補充。'}
+];
+
+// 列表右側的短標籤：雞+鴨鵝 → 家禽，牛+豬+羊 → 家畜
+function tagOf(cats){
+  const p = [];
+  if(FOWL.every(c=>cats.includes(c))) p.push('家禽'); else p.push(...cats.filter(c=>FOWL.includes(c)));
+  if(LIVE.every(c=>cats.includes(c))) p.push('家畜'); else p.push(...cats.filter(c=>LIVE.includes(c)));
+  p.push(...cats.filter(c=>!FOWL.includes(c) && !LIVE.includes(c)));
+  return p.join('・');
+}
+
+/* ===== 類別（上面當篩選、表單當勾選） ===== */
+const catChips = document.getElementById('catChips');
+const checks = document.getElementById('catChecks');
+let curFilter = '全部', showAll = false;
+
+const mk = (label, on, fn)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'+(on?' on':''); b.textContent=label; b.onclick=fn; return b; };
+catChips.appendChild(mk('全部', true, ()=>{ track('filter_click',{cat:'全部'}); setFilter('全部'); }));
+CATS.forEach(c=>{
+  catChips.appendChild(mk(`${c.ico} ${c.name}`, false, ()=>{ track('cat_click',{cat:c.name}); tick(c.id); setFilter(c.name); }));
+  const l = document.createElement('label');
+  l.className='chip'; l.style.display='inline-flex'; l.style.alignItems='center'; l.style.gap='6px';
+  l.innerHTML = `<input type="checkbox" name="cat" value="${c.id}"> ${c.ico} ${c.name}`;
+  l.querySelector('input').onchange = renderNums;
+  checks.appendChild(l);
+});
+function setFilter(n){
+  curFilter = n; showAll = false;
+  [...catChips.children].forEach(b=>b.classList.toggle('on', b.textContent.endsWith(n)));
+  renderProducts();
+}
+
+/* ===== 產品清單：一行一款、點開才看細節、預設只露 6 款 ===== */
+const SHOW_N = 6;
+const viewed = new Set(), picked = new Set();
+function renderProducts(){
+  const list = PRODUCTS.filter(p=>curFilter==='全部' || p.cats.includes(curFilter));
+  const box = document.getElementById('plist'); box.innerHTML = '';
+  (showAll ? list : list.slice(0,SHOW_N)).forEach(p=>{
+    const row = document.createElement('div'); row.className='prow';
+    row.innerHTML = `
+      <button type="button" class="phead"><span class="nm"><b>${p.n}</b><small>${p.en}</small></span><span class="tg">${tagOf(p.cats)}</span><i>＋</i></button>
+      <div class="pmore">
+        <p style="margin:0 0 8px">${p.d}</p>
+        <dl><dt>成分</dt><dd>${p.ing}</dd><dt>包裝</dt><dd>${p.pack}</dd>${p.lic?`<dt>字號</dt><dd>${p.lic}</dd>`:''}</dl>
+        <button type="button" class="btn btn-sm btn-primary">詢價這款</button>
+      </div>`;
+    const ico = row.querySelector('i');
+    row.querySelector('.phead').onclick = ()=>{
+      row.classList.toggle('open'); ico.textContent = row.classList.contains('open') ? '－' : '＋';
+      if(row.classList.contains('open') && !viewed.has(p.n)){ viewed.add(p.n); track('product_view',{product:p.n}); }
+    };
+    row.querySelector('.pmore .btn').onclick = ()=>{
+      track('product_inquire',{product:p.n});
+      picked.add(p.n); renderPicked();
+      p.cats.forEach(cn=>{ const c=CATS.find(x=>x.name===cn); if(c) tick(c.id); });
+      document.getElementById('inquiry').scrollIntoView({behavior:'smooth'});
+    };
+    box.appendChild(row);
+  });
+  if(!showAll && list.length>SHOW_N){
+    const m = document.createElement('button'); m.type='button'; m.className='showall';
+    m.textContent = `看全部 ${list.length} 款 ▾`;
+    m.onclick = ()=>{ track('show_all',{cat:curFilter}); showAll=true; renderProducts(); };
+    box.appendChild(m);
+  }
+  if(!list.length) box.innerHTML = '<div style="padding:16px" class="hint">這類目前沒有對應產品，直接詢價聊聊吧。</div>';
+}
+function renderPicked(){
+  const box = document.getElementById('picked');
+  document.getElementById('pickedBox').style.display = picked.size ? 'block' : 'none';
+  box.innerHTML = [...picked].map(n=>`<span class="tag" data-n="${n}">${n} ✕</span>`).join('');
+  box.querySelectorAll('.tag').forEach(t=>t.onclick=()=>{ picked.delete(t.dataset.n); renderPicked(); });
+}
+renderProducts();
+
+function tick(id){
+  const i = checks.querySelector(`input[value="${id}"]`);
+  i.checked = true; renderNums();
+}
+function renderNums(){
+  const box = document.getElementById('numFields');
+  const on = [...checks.querySelectorAll('input:checked')].map(i=>CATS.find(c=>c.id===i.value));
+  checks.querySelectorAll('label').forEach(l=>l.classList.toggle('on', l.querySelector('input').checked));
+  if(!on.length){ box.innerHTML='<p class="hint" style="margin:0">先勾選上面的種類，這裡會出現對應欄位</p>'; return; }
+  const old = {};
+  box.querySelectorAll('input').forEach(i=>old[i.name]=i.value);   // 保留已輸入的數字
+  box.innerHTML = on.map(c=>
+    `<div class="numrow"><span class="nm">${c.name}</span><input type="number" inputmode="numeric" min="0" name="qty_${c.id}" placeholder="例如 3000" value="${old['qty_'+c.id]||''}"><span class="un">${c.unit}</span></div>`
+  ).join('');
+}
+
+/* ===== 表單進度追蹤：開始填、卡在哪一題、有沒有送出 ===== */
+const form = document.getElementById('f');
+let started = false, submitted = false, abandonSent = false, lastField = '';
+form.addEventListener('focusin', e=>{
+  const n = e.target.name; if(!n || n==='website') return;
+  const field = n.startsWith('qty_') ? 'qty' : n;
+  if(!started){ started = true; track('form_start',{field}); }
+  lastField = field;
+});
+document.getElementById('opt').addEventListener('toggle', e=>{ if(e.target.open) track('form_optional_open'); });
+function sendAbandon(){
+  if(started && !submitted && !abandonSent){ abandonSent = true; track('form_abandon',{last_field:lastField}); }
+}
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden') sendAbandon(); });
+addEventListener('pagehide', sendAbandon);
+
+// 老闆傳的連結帶 ?src=boss_link，自動預選「怎麼知道我們的」
+if(SRC==='boss_link' || SRC==='boss_line') document.getElementById('howFound').value='boss_link';
+
+form.onsubmit = e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  if(fd.get('website')) return;                       // 機器人填了隱藏欄位，直接丟掉
+  const cats = CATS.filter(c=>checks.querySelector(`input[value="${c.id}"]`).checked);
+  const qty = cats.map(c=>`${c.name} ${fd.get('qty_'+c.id)||'未填'} ${c.unit}`).join('、');
+  const inq = {
+    event:'inquiry', ts:new Date().toISOString(), sid, src:SRC, device:DEVICE,
+    cats:cats.map(c=>c.name).join('、'), qty, sites:fd.get('sites')||'', products:[...picked].join('、'),
+    issue:fd.get('issue')||'', name:fd.get('name'), contact:fd.get('contact'),
+    time:fd.get('time')||'', how_found:fd.get('how_found')||''
+  };
+  submitted = true;
+  post(inq);                                          // 詢價單本體（後台寫進 inquiries 分頁並通知）
+  track('form_submit',{cats:inq.cats, products:inq.products, how_found:inq.how_found});   // 漏斗事件（不含個資）
+  document.getElementById('preview').textContent = [
+    `養什麼：${inq.cats||'未選'}`, `規模：${qty||'未填'}`, `場數：${inq.sites||'未填'}`,
+    `有興趣產品：${inq.products||'未選'}`, `狀況：${inq.issue||'未填'}`,
+    `稱呼：${inq.name}`, `聯絡：${inq.contact}`, `時段：${inq.time}`, `怎麼知道的：${inq.how_found||'未填'}`,
+    `（來源 ${SRC}／裝置 ${DEVICE}）`
+  ].join('\n');
+  e.target.style.display='none';
+  document.getElementById('thanks').style.display='block';
+};
+</script>
+</body>
+</html>
