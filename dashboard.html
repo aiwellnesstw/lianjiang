@@ -207,6 +207,8 @@ function buildLive(data){
   LIVE = data.inquiries.slice().reverse().map(r=>({time:r['時間'], name:r['稱呼'], cat:r['養什麼'], prod:r['有興趣產品'], src:r['來源'], st:r['狀態']}));
 }
 if(API && KEY){
+  S = [];   // 有金鑰就別先秀示範數字，避免老闆把亂數當真；後台第一次喚醒可能要 10 秒左右
+  document.querySelector('.sample').textContent = '資料載入中…（第一次可能要等 10 秒）';
   fetch(API + '?action=data&key=' + encodeURIComponent(KEY)).then(r=>r.json()).then(d=>{
     if(!d.ok) throw new Error('bad key');
     buildLive(d);
