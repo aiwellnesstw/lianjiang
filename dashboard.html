@@ -92,9 +92,9 @@ th{color:var(--muted);font-weight:600;font-size:13px}
     <h2>整體架構（給自己和工程面看，業主版會隱藏）</h2>
     <div class="flow">
       <div class="node"><b>① 官網收集</b><ul><li>page_view 進站</li><li>cat_click / filter_click</li><li>product_view / product_inquire</li><li>form_start / form_abandon / form_submit</li><li>網址 ?src= 標來源</li></ul></div>
-      <div class="node"><b>② 傳送</b><ul><li>瀏覽器 sendBeacon</li><li>Google Apps Script 網頁應用程式</li><li>GA4 同步一份（備援）</li></ul></div>
+      <div class="node"><b>② 傳送</b><ul><li>瀏覽器 sendBeacon</li><li>Google Apps Script 網頁應用程式</li><li>（GA4 備援：尚未啟用）</li></ul></div>
       <div class="node"><b>③ 存放</b><ul><li>Google Sheet</li><li>events 分頁：原始事件</li><li>inquiries 分頁：詢價單＋狀態欄</li></ul></div>
-      <div class="node"><b>④ 通知</b><ul><li>詢價單一進來就推 Telegram / LINE</li><li>收件人：老闆＋兒子</li></ul></div>
+      <div class="node"><b>④ 通知</b><ul><li>詢價單一進來就推 Telegram 給 Justin</li><li>要加老闆、兒子收件，在後台設定 chat_id 即可（目前沒開）</li></ul></div>
       <div class="node"><b>⑤ 儀表板</b><ul><li>本頁讀 Sheet 回傳的 JSON</li><li>KPI、漏斗、來源、類別、產品、卡關、名單</li><li>之後：補貨提醒</li></ul></div>
     </div>
     <p class="sub" style="margin:12px 0 0">詢價狀態欄：新進 → 已聯絡 → 已報價 → 成交。老闆直接在 Sheet 改，儀表板就會更新。沿用保險/貸款表單那套後台，不用另外學新工具。</p>
@@ -231,7 +231,8 @@ document.querySelectorAll('.pill[data-d]').forEach(b=>b.onclick=()=>{
   render();
 });
 $('ownerBtn').onclick = ()=>{ const on = $('app').classList.toggle('owner'); $('ownerBtn').classList.toggle('on',on); $('ownerBtn').textContent = on?'工程版':'業主版'; };
-if(new URLSearchParams(location.search).get('view')==='owner') $('ownerBtn').click();
+// 預設就是業主版（隱藏架構圖與切換鈕）；只有網址加 ?view=eng 才看得到架構圖，避免一般人打開就看到內部設計
+if(new URLSearchParams(location.search).get('view')!=='eng'){ $('app').classList.add('owner'); $('ownerBtn').style.display='none'; }
 render();
 </script>
 </body>
