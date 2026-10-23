@@ -93,9 +93,9 @@ footer a{color:#fff}
       <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="hero">諮詢產品</a>
       <a class="btn btn-line" href="#" data-track="cta_line" onclick="return false">LINE 聯絡我們</a>
     </div>
-    <div class="trust"><span>雲嘉南在地服務</span><span>引進歐洲・印度・韓國</span><span>可客製配方／OEM・ODM</span></div>
+    <div class="trust"><span>全省服務</span><span>引進世界各國產品・可代辦進口</span><span>可客製配方／OEM・ODM</span><span>徵各區域經銷夥伴</span></div>
     <div class="boss">
-      <div>老闆親自接電話、親自回覆，歡迎直接來電或留下資料。</div>
+      <div>老闆親自接電話、親自回覆，歡迎直接來電或留下資料。公司不定時有產品促銷，歡迎來電詢問；有意合作經銷也歡迎聯絡。</div>
     </div>
   </div>
 </header>
@@ -140,7 +140,7 @@ footer a{color:#fff}
       <label class="q">你的場在哪個縣市？<span class="hint">（選填）</span></label>
       <select name="county" id="county">
         <option value="">請選擇</option>
-        <option>雲林縣</option><option>嘉義縣</option><option>嘉義市</option><option>台南市</option><option>其他縣市</option>
+        <option>基隆市</option><option>台北市</option><option>新北市</option><option>桃園市</option><option>新竹縣市</option><option>苗栗縣</option><option>台中市</option><option>彰化縣</option><option>南投縣</option><option>雲林縣</option><option>嘉義縣</option><option>嘉義市</option><option>台南市</option><option>高雄市</option><option>屏東縣</option><option>宜蘭縣</option><option>花蓮縣</option><option>台東縣</option><option>離島</option>
       </select>
 
       <details class="opt" id="opt">
@@ -175,7 +175,7 @@ footer a{color:#fff}
 
       <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
       <button class="btn btn-primary" type="submit" style="width:100%;margin-top:20px">送出諮詢</button>
-      <p class="hint" style="margin:10px 0 0;font-size:13px">送出即表示你同意聯將貿易實業有限公司使用你留下的資料，作為聯絡報價與產品諮詢之用，不會提供給無關的第三方。想查詢或刪除資料，請來電 0937-650-075。</p>
+      <p class="hint" style="margin:10px 0 0;font-size:13px">送出即表示你同意聯將貿易實業有限公司使用你留下的資料，作為聯絡報價與產品諮詢之用，不會提供給無關的第三方。想查詢或刪除資料，請來電 0937-650-075 或 0910-231-177。</p>
     </form>
     <div id="thanks">
       <b>收到了！老闆會盡快聯絡你。</b>
@@ -188,7 +188,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <b>聯將貿易實業有限公司</b>（King Alliance Trading Co., Ltd）<br>
-    電話：<a href="tel:0937650075" data-track="tel_click" data-pos="footer">0937-650-075</a>　｜　服務地區：雲林、嘉義、台南<br>
+    電話：<a href="tel:0937650075" data-track="tel_click" data-pos="footer">0937-650-075</a>　／　<a href="tel:0910231177" data-track="tel_click" data-pos="footer2">0910-231-177</a>　｜　服務地區：全省，另徵各區域經銷夥伴<br>
     地址：嘉義縣鹿草鄉下潭村 127 號
     <p style="margin:12px 0 0;font-size:12px;opacity:.75">本網站產品資訊僅供參考，實際成分、用量與使用方式請以產品包裝標示為準，使用前歡迎洽聯將諮詢。本站產品不具預防、治療動物疾病之效用，亦不宣稱促進或調節動物生理機能；動物如有疾病，請洽獸醫師診治。產品圖片僅供參考。</p>
   </div>
@@ -295,7 +295,24 @@ const PRODUCTS = [
   {n:'益水淨', en:'WIN-POND', cats:['水產'], ing:'枯草芽孢桿菌 ≥ 3×10⁹ CFU／公斤、活性碳、沸石', pack:'2 公斤／袋', d:'三層緩釋顆粒益生菌，沉入池底協助分解有機物，水質維護用。'},
   {n:'益水清', en:'BAKA NEW', cats:['水產'], ing:'枯草、地衣、巨大芽孢桿菌（各 ≥ 3×10⁹ CFU／公斤）、活性碳、沸石、葡萄糖緩衝劑', pack:'200 公克／袋', d:'三種芽孢桿菌複合菌錠，高密度養殖池水質維護用。請勿與化學消毒劑同時使用，間隔至少 24 小時。'},
   {n:'肝勇', en:'HEPAMIN PLUS', cats:['水產'], ing:'氯化膽鹼、牛磺酸、L-肉鹼、維生素 B3（菸鹼酸）、植物萃取賦形劑', pack:'1 公升', d:'魚蝦飼料拌料用液劑，每週 3–4 次與飼料充分混合投餵。'},
-  {n:'魚蝦寶', en:'YUCCA MAX', cats:['水產'], ing:'天然絲蘭萃取皂苷 ≥ 35,000 mg／公升', pack:'1 公升', d:'天然絲蘭萃取液，池塘水質維護用；使用前以 1 公升對 50 公升清水稀釋再均勻潑灑。'}
+  {n:'魚蝦寶', en:'YUCCA MAX', cats:['水產'], ing:'天然絲蘭萃取皂苷 ≥ 35,000 mg／公升', pack:'1 公升', d:'天然絲蘭萃取液，池塘水質維護用；使用前以 1 公升對 50 公升清水稀釋再均勻潑灑。'},
+  // ---- 2026-10-24 再新增 16 項（來源：聯將第二批素材；只留成分／用法／規格，功效宣稱已刪，不顯示原廠品牌）----
+  {n:'百福菌 200', en:'', cats:['牛'], ing:'活性酵母菌', pack:'5 公斤 × 4 包／箱', d:'牛用活性酵母菌，飼料混合稀釋後餵飼，或溶於飲水給予。乾乳期 5–10 g/頭/天；泌乳期 20–30 g/頭/天。保存期限 24 個月，開封後請盡快用完。'},
+  {n:'羅維礦', en:'R200／R400', cats:['牛','羊'], ing:'每公斤有效力價含量不低於（R200／R400）：維生素 A 2,000,000／4,000,000 IU、維生素 D3 500,000／1,000,000 IU、維生素 E 8／20 g、菸鹼酸 20／30 g、生物素 0.02／0.03 g、銅 1.5–2.1／2.5–3.5 g、鐵 10／15 g、鋅 6.6–9.24／11–15.4 g、錳 4–5.6／7–9.8 g、碘 0.2／0.3 g、硒 0.04–0.056／0.06–0.084 g、鈷 0.05／0.075 g', pack:'R200 每包 20 公斤／R400 每包 25 公斤', lic:'農畜飼製字號 R200 AM02727、R400 AM02728', d:'牛、羊等反芻動物用維生素礦物質預混料，須以預混方式使用。R200：每公噸 TMR 添加 5 公斤，或每頭每日添加 30–50 g；R400：每公噸 TMR 添加 3 公斤，或每頭每日添加 20–30 g。請貯於陰涼乾燥處，開封後儘快使用完畢。'},
+  {n:'綠肥', en:'BIOGREEN', cats:[...FOWL,...LIVE,...BIRD], ing:'L-離胺酸鹽酸鹽、山梨醇、植物萃取液（法國洋薊、貓鬚草、波爾多葉、迷迭香、風車屬）', pack:'1 公升', d:'口服液劑，連續使用 3–5 天。雞鴨 1–2 mL／公升飲水；鴿 1–2 mL／公升飲水（約 20 隻）；肥育豬 15–30 mL／頭；母豬 45 mL／頭；牛 50–80 mL／頭；犢牛 30 mL／頭；羊 15–20 mL／頭。避免高溫與日照。'},
+  {n:'愛快好', en:'AQUABIO', cats:['水產'], ing:'嗜酸乳桿菌 ≥ 1.0×10⁷ CFU/g、枯草芽孢桿菌 ≥ 1.0×10⁸ CFU/g', pack:'1 公斤鋁箔袋 × 20 包／箱', d:'水產益生菌，適用全時期。養殖池每週每 10,000 m³ 稀釋使用 1 公斤，水質不佳時可視情況加到 2 公斤；添加飼料每噸 1 公斤（依配方）。製造日起 24 個月，儲存於陰涼乾燥處。'},
+  {n:'肝霸', en:'SUPER LIVER-O', cats:[...FOWL,...LIVE,'水產'], ing:'牛磺酸 3,000 毫克、肌醇 1,000 毫克、水飛薊素、左旋肉鹼、左旋離胺酸、維生素 B12、膽鹼、生物素、維生素 E、硒、山梨糖醇、短鏈脂肪酸', pack:'1 公斤 × 20 包／箱', d:'營養補充配方，可稀釋於飲水或加入飼料，每噸飼料添加 0.5–1 公斤；水產每 10,000 m³ 養殖池水使用 1.5 公斤。製造日起 24 個月，開封後請密封保存。'},
+  {n:'安寧健', en:'Anigane', cats:[...FOWL,'豬'], ing:'每公升含：甘油磷酸鈉 3.5 g、檸檬酸鉀 9.1 g、檸檬酸鐵銨 4.9 g、硫酸錳 0.8 g，另含維生素 B1 與酵母', pack:'1 公升', d:'液態營養補充劑。豬直接餵飼：初生仔豬 5 mL／頭／日、離乳及生長豬 10 mL、公母豬 15 mL；飲水稀釋 1500 倍持續給予（環境 25℃ 以上稀釋 3000 倍）。'},
+  {n:'舒神', en:'Stressen', cats:FOWL, ing:'每公升含：氯化鈉 140 g、氯化鉀 60 g、檸檬酸鈉 100 g，另含增味劑與賦形劑', pack:'1 公升 × 12 罐／箱', d:'家禽用電解質口服液劑，pH 約 7.2，薄荷口味。肉雞、蛋雞、種雞：每 1000 公升飲水加 1 公升，使用 5–10 天。製造日起 24 個月，請遠離熱源。'},
+  {n:'來舒效', en:'LYSOZYME L', cats:[...FOWL,...LIVE], ing:'每毫升含：溶菌酶 500 mg、維生素 C 100 mg、維生素 E 100 mg、硒 2.0 mg', pack:'1 公升', d:'飲水添加的營養補充液。家禽：每噸水加 1 公升；牛、羊、豬：每公升飲水加 1.5–2 毫升，或依獸醫師建議劑量使用。製造日起 24 個月。'},
+  {n:'EM 枯草', en:'EM PURE', cats:['水產'], ing:'芽孢桿菌屬 ≥ 5×10¹¹ CFU/kg（枯草芽孢桿菌 ≥ 3×10¹¹、地衣芽孢桿菌 ≥ 2×10¹¹、植物乳桿菌 ≥ 1×10¹⁰）；水分 ≤ 10%；載體葡萄糖', pack:'100 公克／袋', d:'水產益生菌，池塘水質維護用。直接稀釋：每 1,000–1,500 m³ 池水 100 g；或依「50 公升清水 + 2 公斤糖蜜 + 100 g，密封培養 24–48 小時」後，每 1,000 m³ 使用 5–10 公升，每週 2–3 次。'},
+  {n:'蝦寶', en:'Q10', cats:['水產'], ing:'芽孢桿菌屬 ≥ 3×10¹¹ CFU/kg（巨大、凝結、地衣芽孢桿菌各 ≥ 1×10¹¹）；纖維素酶 ≥ 10,000 UI/kg、蛋白酶 ≥ 20,000 UI/kg；水分 ≤ 10%；載體葡萄糖', pack:'250 公克／袋', d:'冷凍乾燥益生菌，池塘水質維護用。每 4,000–5,000 m³ 池水使用 250 g，每 5–7 天一次；池水較髒時每 2,000–3,000 m³ 使用 250 g。施用後持續曝氣 2–3 小時，建議夜間使用。'},
+  {n:'蝦勇', en:'UV-BASI', cats:['水產'], ing:'芽孢桿菌屬 ≥ 4×10⁹ CFU/kg（枯草、短小、解澱粉、地衣芽孢桿菌各 ≥ 1×10⁹）；水分 ≤ 10%；載體', pack:'500 公克／袋', d:'蝦池用複合芽孢桿菌，水質維護。池塘放蝦前 1–2 天，每 1,000–1,500 m³ 使用 500 g；定期每 5–7 天每 2,000 m³ 使用 500 g。使用時請持續運轉水車與底部曝氣，適用於清潔化養蝦模式。'},
+  {n:'基能-鋅 15', en:'Zn-AMINOX 15', cats:['豬','雞'], ing:'有機鋅（甲硫胺酸鋅，以鋅計）15.0%–17.0%；賦形劑米糠；鉛 ≤ 50 ppm、鎘 ≤ 10 ppm、汞 ≤ 0.5 ppm、砷 ≤ 12 ppm', pack:'20 公斤袋裝', lic:'農飼料入字第 TI03358 號', d:'豬、雞用有機鋅預混料，全期飼料皆可使用，預混於飼料中，每噸飼料添加 400 公克。製造日起 24 個月，未使用時請封緊。'},
+  {n:'基能-硒 4000', en:'Se-AMINOX 4000', cats:['豬','雞'], ing:'有機硒（蛋白硒，以硒計）4000–5000 ppm；賦形劑米糠；鉛 ≤ 50 ppm、鎘 ≤ 10 ppm、汞 ≤ 0.5 ppm、砷 ≤ 12 ppm', pack:'20 公斤袋裝', lic:'農飼料入字第 TI03277 號', d:'豬、雞用有機硒預混料，全期飼料皆可使用，預混於飼料中：豬每噸飼料 75 公克，雞每噸飼料 37.5 公克。操作人員應配戴防護設備。製造日起 24 個月。'},
+  {n:'毒素滅液', en:'TOXIMED', cats:FOWL, ing:'聚乙烯吡咯烷酮 poly[1-(2-oxo-1-pyrrolidinyl)ethylene] 3%', pack:'1 公升 × 5 瓶 × 2／箱', d:'家禽飲水添加的液態配方，完全溶於水，不需預先稀釋。每 1000 公升飲水加 100 mL（稀釋 10,000 倍），連續使用 3–10 天。'},
+  {n:'熱非非', en:'FEVER FREE-L', cats:FOWL, ing:'每 100 毫升含：大蒜 9 g、餘甘子 8 g、珠子草 7 g、連翹 6 g、印度苦楝樹 18 g、假馬齒莧 11 g、三果木 5 g、板藍根 5 g、黃芩 8 g，賦形劑適量', pack:'1 公升瓶裝', d:'植物萃取複方，飲水添加。蛋雞、肉雞：每 100 隻每天 5 毫升；鴨、鵝：每 100 隻每天 2.5–5 毫升；或依獸醫師建議劑量使用。製造日起 24 個月。'},
+  {n:'速沛-L', en:'SUPERMUNE-L', cats:[...FOWL,'豬'], ing:'每毫升含：睡茄 15 mg、四稜白粉藤 15 mg、聖羅勒 10 mg、夜花 10 mg、黃荊 10 mg、寬筋藤 30 mg、穿心蓮 30 mg、黃細心 15 mg、印度苦楝樹 20 mg、印度乳香 5 mg、洋甘草 10 mg、羊蹄甲 10 mg、薑黃 10 mg', pack:'1 公升 × 10／箱', d:'植物萃取複方飲水添加液劑，使用 5–7 天。家禽：每 1,000 公升水加 1 公升；豬（每 100 頭每天）：仔豬 80 mL、生長豬 250 mL、肥育豬 500 mL。使用前請搖勻，避免日照。'}
 ];
 
 // 列表右側的短標籤：雞+鴨鵝 → 家禽，牛+豬+羊 → 家畜
@@ -321,7 +338,7 @@ fetch('weekly.json', {cache:'no-store'}).then(r=>r.ok ? r.json() : Promise.rejec
 // 產品小圖（img/ 資料夾，每張約 2KB）。NEOSTRONG 六款型錄上是同一支瓶子，共用一張
 const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','抗熱 C 液劑':'electrolite-liquid','抗熱 C 散劑':'electrolite-powder','腎淨':'renal','呼順':'resporan','球淨':'cocciran','喜樂肝':'firstday','喜樂維':'vitaforce','喜樂熱':'stressdown'};
 // 新增產品（IMG 值為空字串）還沒有圖，先用灰底占位圖；沒列在 IMG 的 NEOSTRONG 系列維持共用瓶圖
-const NOIMG = ['乳爽','高棕櫚酸乳牛能量脂肪','過瘤胃棕櫚脂肪粉','舒立效','維他強','舒勁','保水力','益水淨','益水清','肝勇','魚蝦寶'];
+const NOIMG = ['乳爽','高棕櫚酸乳牛能量脂肪','過瘤胃棕櫚脂肪粉','舒立效','維他強','舒勁','保水力','益水淨','益水清','肝勇','魚蝦寶','百福菌 200','羅維礦','綠肥','愛快好','肝霸','安寧健','舒神','來舒效','EM 枯草','蝦寶','蝦勇','基能-鋅 15','基能-硒 4000','毒素滅液','熱非非','速沛-L'];
 const PH = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="56"><rect width="40" height="56" rx="6" fill="#ece8dc"/><rect x="14" y="10" width="12" height="7" rx="2" fill="#c9c3b0"/><rect x="9" y="17" width="22" height="30" rx="5" fill="#c9c3b0"/></svg>');
 const thumb = n => NOIMG.includes(n) ? PH : 'img/' + (IMG[n] || 'neostrong') + '.webp';
 
