@@ -6,7 +6,7 @@
 <!-- 內容安全政策：只允許連到 Apps Script 後台，頁面被塞進外部腳本也連不出去。之後要裝 GA4 要把 googletagmanager / google-analytics 加進 script-src 與 connect-src -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <title>聯將貿易實業有限公司｜畜禽水產營養與場域諮詢</title>
-<meta name="description" content="聯將貿易實業有限公司：牛、豬、羊、雞、鴨鵝、水產與寵物鳥/鴿的營養添加品，可依場域詢價與諮詢。">
+<meta name="description" content="聯將貿易實業有限公司：牛、豬、羊、雞、鴨鵝、水產與寵物鳥/鴿的營養添加品，歡迎依場域諮詢。">
 <style>
 :root{
   --bg:#faf8f3; --card:#ffffff; --ink:#2b2a26; --muted:#6e6a5e;
@@ -90,7 +90,7 @@ footer a{color:#fff}
     <h1>牲畜吃得對，場子才養得好</h1>
     <p>牛、豬、羊、雞、鴨鵝、水產、寵物鳥都能聊。說說你的場域狀況，老闆幫你配適合的營養添加品。</p>
     <div class="btns">
-      <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="hero">我要詢價</a>
+      <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="hero">諮詢產品</a>
       <a class="btn btn-line" href="#" data-track="cta_line" onclick="return false">LINE 聯絡我們</a>
     </div>
     <div class="trust"><span>雲嘉南在地服務</span><span>引進歐洲・印度・韓國</span><span>可客製配方／OEM・ODM</span></div>
@@ -121,7 +121,7 @@ footer a{color:#fff}
 
 <section id="inquiry" style="background:#fff;border-top:1px solid var(--line)">
   <div class="wrap">
-    <h2>詢價 / 諮詢</h2>
+    <h2>產品諮詢</h2>
     <form id="f" autocomplete="off">
       <label class="q">你養的是什麼？<span class="hint">（可複選）</span></label>
       <div class="chips" id="catChecks"></div>
@@ -174,7 +174,7 @@ footer a{color:#fff}
       </details>
 
       <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
-      <button class="btn btn-primary" type="submit" style="width:100%;margin-top:20px">送出詢價</button>
+      <button class="btn btn-primary" type="submit" style="width:100%;margin-top:20px">送出諮詢</button>
       <p class="hint" style="margin:10px 0 0;font-size:13px">送出即表示你同意聯將貿易實業有限公司使用你留下的資料，作為聯絡報價與產品諮詢之用，不會提供給無關的第三方。想查詢或刪除資料，請來電 0937-650-075。</p>
     </form>
     <div id="thanks">
@@ -190,12 +190,13 @@ footer a{color:#fff}
     <b>聯將貿易實業有限公司</b>（King Alliance Trading Co., Ltd）<br>
     電話：<a href="tel:0937650075" data-track="tel_click" data-pos="footer">0937-650-075</a>　｜　服務地區：雲林、嘉義、台南<br>
     地址：嘉義縣鹿草鄉下潭村 127 號
+    <p style="margin:12px 0 0;font-size:12px;opacity:.75">本網站產品資訊僅供參考，實際成分、用量與使用方式請以產品包裝標示為準，使用前歡迎洽聯將諮詢。本站產品不具預防、治療動物疾病之效用，亦不宣稱促進或調節動物生理機能；動物如有疾病，請洽獸醫師診治。產品圖片僅供參考。</p>
   </div>
 </footer>
 
 <div class="sticky">
   <a class="btn btn-ghost" href="tel:0937650075" data-track="tel_click" data-pos="bar">打電話</a>
-  <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="bar">我要詢價</a>
+  <a class="btn btn-primary" href="#inquiry" data-track="cta_inquiry" data-pos="bar">諮詢產品</a>
 </div>
 
 <script>
@@ -282,7 +283,19 @@ const PRODUCTS = [
   {n:'翔美寶', en:'NEOSTRONG SAFE', cats:BIRD, ing:'薊與朝鮮薊萃取物、甜菜鹼、氯化膽鹼、益生元、維生素、有機酸、中鏈脂肪酸', pack:'250 ml／500 ml', d:'植物萃取加益生元配方，日常體況維持。'},
   {n:'翔健寶', en:'NEOSTRONG CITRO', cats:BIRD, ing:'短中鏈有機酸、甘油單酯、柑橘類黃酮', pack:'250 ml／500 ml', d:'有機酸配方，飲水酸化與管線清潔搭配。'},
   {n:'翔安寶', en:'NEOSTRONG AMINO V', cats:BIRD, ing:'維生素、胺基酸、天然植物萃取', pack:'250 ml／500 ml', d:'維生素加胺基酸補充，換羽、繁殖期搭配使用。'},
-  {n:'翔勇寶', en:'NEOSTRONG HEPATOPRO', cats:BIRD, ing:'護肝植物萃取、L-肉鹼、維生素 B1 / B2 / B6 / B12、泛酸鈣、菸鹼酸、甜菜鹼、氯化膽鹼、胺基酸、山梨醇', pack:'250 ml／500 ml', d:'高濃度液態補充配方，運動與繁殖期的營養補充。'}
+  {n:'翔勇寶', en:'NEOSTRONG HEPATOPRO', cats:BIRD, ing:'護肝植物萃取、L-肉鹼、維生素 B1 / B2 / B6 / B12、泛酸鈣、菸鹼酸、甜菜鹼、氯化膽鹼、胺基酸、山梨醇', pack:'250 ml／500 ml', d:'高濃度液態補充配方，運動與繁殖期的營養補充。'},
+  // ---- 2026-10-23 新增 11 項（來源：聯將提供之規格頁；已依法規收斂用詞，不顯示原廠品牌）----
+  {n:'乳爽', en:'NATURA BARIER', cats:['牛'], ing:'乳酸 0.3–3%、甘油 7.5%', pack:'20 公升', d:'擠乳後使用的乳頭保護液，含甘油與乳酸，在乳頭形成保護膜並保濕；直接加入浸乳杯，無需稀釋。'},
+  {n:'高棕櫚酸乳牛能量脂肪', en:'', cats:['牛'], ing:'棕櫚酸（C16:0）86.8%、粗脂肪 99.9%、硬脂酸 1.7%、油酸 8.9%；滑移熔點 61.6℃、碘價 11.7', pack:'', d:'高純度棕櫚酸脂肪，乳牛日糧的能量來源。建議添加量 200–600 g/頭/天（依牛群階段與配方調整），總脂肪建議控制在日糧乾物的 3%–6%。'},
+  {n:'過瘤胃棕櫚脂肪粉', en:'', cats:['牛'], ing:'三個等級：98 型（棕櫚酸最低 98%）、85 型（最低 85%）、55 型（脂肪酸鈣，粗脂肪最低 82.5%）', pack:'25 公斤袋／650 公斤噸袋（顆粒狀）', d:'過瘤胃脂肪粉，乳牛日糧的能量來源，可依配方選擇等級；建議用量依泌乳階段 150–600 g/頭/日。'},
+  {n:'舒立效', en:'', cats:[...FOWL,'豬'], ing:'白柳提取物、氯化鈉、氯化鉀', pack:'1 公升／5 公升', d:'飲水添加的補充飼料，適用於壓力時期。每 1000 公升飲水加 300 毫升，持續 12 小時，連續 3–5 天。豬、家禽用（不建議用於 28 日齡內仔豬、泌乳母豬）。'},
+  {n:'維他強', en:'VITMAX', cats:[...FOWL,...LIVE], ing:'維生素 A / D3 / E / B1 / B2 / B6 / B12、L-離胺酸、DL-蛋胺酸、氯化膽鹼', pack:'1 公升', d:'高濃縮維生素與胺基酸營養液，飲水添加，建議連續 5–7 天。'},
+  {n:'舒勁', en:'ELECTRO LIQUID', cats:[...FOWL,'牛'], ing:'磷酸、氯化鈣、氯化鐵、硫酸鎂、氯化鈉、氯化鉀、硫酸錳、氯化鋅、氯化銅、氯化鈷', pack:'1 公升', d:'電解質與礦物質補充液，家禽與牛隻飲水添加；高溫季節可於熱浪前連續使用 3–5 天。'},
+  {n:'保水力', en:'', cats:['豬'], ing:'碳酸氫鈉、檸檬酸、氯化鈉、氯化鉀、乳酸桿菌／比菲德氏菌', pack:'1 公斤 × 15 包／桶', d:'豬用電解質粉，含益生菌，易溶於水。泡水飲用：1000 g 對 1000 L 飲水；或每公噸飼料添加 1–2 公斤。'},
+  {n:'益水淨', en:'WIN-POND', cats:['水產'], ing:'枯草芽孢桿菌 ≥ 3×10⁹ CFU／公斤、活性碳、沸石', pack:'2 公斤／袋', d:'三層緩釋顆粒益生菌，沉入池底協助分解有機物，水質維護用。'},
+  {n:'益水清', en:'BAKA NEW', cats:['水產'], ing:'枯草、地衣、巨大芽孢桿菌（各 ≥ 3×10⁹ CFU／公斤）、活性碳、沸石、葡萄糖緩衝劑', pack:'200 公克／袋', d:'三種芽孢桿菌複合菌錠，高密度養殖池水質維護用。請勿與化學消毒劑同時使用，間隔至少 24 小時。'},
+  {n:'肝勇', en:'HEPAMIN PLUS', cats:['水產'], ing:'氯化膽鹼、牛磺酸、L-肉鹼、維生素 B3（菸鹼酸）、植物萃取賦形劑', pack:'1 公升', d:'魚蝦飼料拌料用液劑，每週 3–4 次與飼料充分混合投餵。'},
+  {n:'魚蝦寶', en:'YUCCA MAX', cats:['水產'], ing:'天然絲蘭萃取皂苷 ≥ 35,000 mg／公升', pack:'1 公升', d:'天然絲蘭萃取液，池塘水質維護用；使用前以 1 公升對 50 公升清水稀釋再均勻潑灑。'}
 ];
 
 // 列表右側的短標籤：雞+鴨鵝 → 家禽，牛+豬+羊 → 家畜
@@ -307,7 +320,10 @@ fetch('weekly.json', {cache:'no-store'}).then(r=>r.ok ? r.json() : Promise.rejec
 
 // 產品小圖（img/ 資料夾，每張約 2KB）。NEOSTRONG 六款型錄上是同一支瓶子，共用一張
 const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','抗熱 C 液劑':'electrolite-liquid','抗熱 C 散劑':'electrolite-powder','腎淨':'renal','呼順':'resporan','球淨':'cocciran','喜樂肝':'firstday','喜樂維':'vitaforce','喜樂熱':'stressdown'};
-const thumb = n => 'img/' + (IMG[n] || 'neostrong') + '.webp';
+// 新增產品（IMG 值為空字串）還沒有圖，先用灰底占位圖；沒列在 IMG 的 NEOSTRONG 系列維持共用瓶圖
+const NOIMG = ['乳爽','高棕櫚酸乳牛能量脂肪','過瘤胃棕櫚脂肪粉','舒立效','維他強','舒勁','保水力','益水淨','益水清','肝勇','魚蝦寶'];
+const PH = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="56"><rect width="40" height="56" rx="6" fill="#ece8dc"/><rect x="14" y="10" width="12" height="7" rx="2" fill="#c9c3b0"/><rect x="9" y="17" width="22" height="30" rx="5" fill="#c9c3b0"/></svg>');
+const thumb = n => NOIMG.includes(n) ? PH : 'img/' + (IMG[n] || 'neostrong') + '.webp';
 
 /* ===== 類別（上面當篩選、表單當勾選） ===== */
 // 沒有對應產品的牲畜先不顯示（之後新增產品時，對應的牲畜會自動出現，不用改這裡）
@@ -344,8 +360,8 @@ function renderProducts(){
       <button type="button" class="phead"><img class="th" src="${thumb(p.n)}" alt="${p.n}" width="40" height="56" loading="lazy"><span class="nm"><b>${p.n}</b><small>${p.en}</small></span><span class="tg">${tagOf(p.cats)}</span><i>＋</i></button>
       <div class="pmore">
         <p style="margin:0 0 8px">${p.d}</p>
-        <dl><dt>成分</dt><dd>${p.ing}</dd><dt>包裝</dt><dd>${p.pack}</dd>${p.lic?`<dt>字號</dt><dd>${p.lic}</dd>`:''}</dl>
-        <button type="button" class="btn btn-sm btn-primary">詢價這款</button>
+        <dl><dt>成分</dt><dd>${p.ing}</dd>${p.pack?`<dt>包裝</dt><dd>${p.pack}</dd>`:''}${p.lic?`<dt>字號</dt><dd>${p.lic}</dd>`:''}</dl>
+        <button type="button" class="btn btn-sm btn-primary">諮詢這款</button>
       </div>`;
     const ico = row.querySelector('i');
     row.querySelector('.phead').onclick = ()=>{
@@ -366,7 +382,7 @@ function renderProducts(){
     m.onclick = ()=>{ track('show_all',{cat:curFilter}); showAll=true; renderProducts(); };
     box.appendChild(m);
   }
-  if(!list.length) box.innerHTML = '<div style="padding:16px" class="hint">這類目前沒有對應產品，直接詢價聊聊吧。</div>';
+  if(!list.length) box.innerHTML = '<div style="padding:16px" class="hint">這類目前沒有對應產品，直接諮詢聊聊吧。</div>';
 }
 function renderPicked(){
   const box = document.getElementById('picked');
