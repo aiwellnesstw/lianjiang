@@ -339,7 +339,9 @@ const PRODUCTS = [
   // ---- 2026-10-25 第四批 3 項（來源：聯將 FB 貼文；只留成分／用法／規格，功效宣稱已刪，不顯示原廠品牌）----
   {n:'奶師父', en:'', cats:[...FOWL,'牛','豬'], ing:'原料：穀物副產品、餅粕、糖蜜、酵母代謝產物；功能性成分：有機酸、核酸、小肽、寡糖、酶類、醇類、酯類、未知生長因子', pack:'20 公斤／箱', d:'酵母培養物，混入飼料使用，適用牛、豬、蛋（種）禽、肉禽。犢牛 5–10 g/天；女牛、泌乳牛 10–20 g/天；每噸飼料添加：乳仔豬 2–3 公斤、生長豬 1–2 公斤、母豬 2–3 公斤、蛋（種）禽與肉禽 1–2 公斤。'},
   {n:'益倍佳', en:'Easyhealth', cats:[...FOWL,...LIVE,'水產','寵物鳥/鴿'], ing:'地衣（枯草）芽孢桿菌 200 億 CFU/g、凝結芽孢桿菌 30 億 CFU/g、丁酸梭菌 1 億 CFU/g', pack:'1 公斤 × 15 包／箱；25 公斤／袋', d:'複合益生菌，適用家禽、鳥、豬、魚、蝦、水族、反芻動物等。每噸飼料添加：水產 300–500 g、豬 500 g、禽類 300–500 g、水禽 500 g、反芻動物 500–1,000 g；淨化水質：一分地、水深一公尺使用 500 g。'},
-  {n:'剋黴星', en:'Duplo', cats:[...FOWL,'牛','豬'], ing:'規格化孔徑吸附成分、酵母細胞壁、標準化植物萃取物（薄荷精油、菊苣根、洋甘菊、迷迭香萃取物）、維生素、礦物質', pack:'20 公斤／包', d:'飼料添加用，搭配黴菌毒素管理。每噸飼料添加：蛋雞、肉雞 1–1.5 公斤；火雞 1.5–2 公斤；種豬 1–2 公斤；仔豬 1 公斤。乳牛每日 10–40 g；肉牛每日 10–20 g。'}
+  {n:'剋黴星', en:'Duplo', cats:[...FOWL,'牛','豬'], ing:'規格化孔徑吸附成分、酵母細胞壁、標準化植物萃取物（薄荷精油、菊苣根、洋甘菊、迷迭香萃取物）、維生素、礦物質', pack:'20 公斤／包', d:'飼料添加用，搭配黴菌毒素管理。每噸飼料添加：蛋雞、肉雞 1–1.5 公斤；火雞 1.5–2 公斤；種豬 1–2 公斤；仔豬 1 公斤。乳牛每日 10–40 g；肉牛每日 10–20 g。'},
+  {n:'剋黴靈', en:'', cats:[...FOWL,...LIVE], ing:'蒙脫石（Bentonite-1m558）、海泡石、芽孢桿菌、植物萃取物（薄荷精油、菊苣根、洋甘菊、迷迭香萃取物）、酵母萃取物', pack:'25 公斤／包', d:'飼料添加用，搭配黴菌毒素管理。每噸飼料添加：反芻動物 1–3 公斤；豬、雞 1–3 公斤；水禽 2–3 公斤。'},
+  {n:'Nutrifat Plus', en:'', cats:['牛'], ing:'蒸餾精製非反式脂肪三酸甘油酯，另含卵磷質 6%；脂肪酸組成：C16 飽和脂肪酸 70%、C18 飽和脂肪酸 5%、單元不飽和脂肪酸 15%、多元不飽和脂肪酸 5%；總能 9,000 kcal/kg', pack:'25 公斤／包（微顆粒）', d:'乳牛用能量脂肪，蒸餾精製加卵磷質。建議添加量：泌乳初期 300 g/頭/天；泌乳中期 200 g/頭/天；泌乳晚期 100 g/頭/天。請存放於乾燥陰涼處。'}
 ];
 
 // 列表右側的短標籤：雞+鴨鵝 → 家禽，牛+豬+羊 → 家畜
@@ -363,9 +365,9 @@ fetch('weekly.json', {cache:'no-store'}).then(r=>r.ok ? r.json() : Promise.rejec
 }).catch(()=>{});
 
 // 產品小圖（img/ 資料夾，每張約 2KB）。NEOSTRONG 六款型錄上是同一支瓶子，共用一張
-const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','抗熱 C 液劑':'electrolite-liquid','抗熱 C 散劑':'electrolite-powder','腎淨':'renal','呼順':'resporan','球淨':'cocciran','喜樂肝':'firstday','喜樂維':'vitaforce','喜樂熱':'stressdown','來舒效':'lysozyme','熱非非':'feverfree','毒素滅液':'toximed','速沛-L':'supermune','肝霸 散劑':'superliver','乳爽':'natura','維他強':'vitmax','益水淨':'winpond','益水清':'baka','剋黴星':'duplo','益倍佳':'easyhealth','奶師父':'enhalor','安補舒':'anprosol','腸益清 ONE':'essencial','呼益清':'eucamenth','痰舒清-L':'mucolyt','倍特耐':'betailock','益來電':'elytes','愛肥精':'agrovit','冠球-液':'cocciliq','金士勇':'metafisiol','氣立通':'respilif','速立酵':'enzylif','肝腎福':'hepatocare','百賜福':'maxifort','百喜多':'pronubi','益鈣':'calfast','益佳硒':'selenium','百禾 C':'bioherb','酸寶':'aquacid','立得妥':'reidrotonic','泛多礦':'pantosal','舒立效':'normopirex','舒勁':'electroliquid','保水力':'aanutri','綠肥':'biogreen','安寧健':'anigane','舒神':'stressen','肝勇':'hepamin','魚蝦寶':'yuccamax','肝霸 液劑':'superliver','愛快好':'aquabio','蝦寶':'q10','EM 枯草':'empure','蝦勇':'uvbasi','百福菌 200':'yakangbao','基能-鋅 15':'zinaminox','羅維礦':'lovit'};
+const IMG = {'清毒康':'toxizero','肝淨':'heparan','腸安酸':'ranacid','抗熱 C 液劑':'electrolite-liquid','抗熱 C 散劑':'electrolite-powder','腎淨':'renal','呼順':'resporan','球淨':'cocciran','喜樂肝':'firstday','喜樂維':'vitaforce','喜樂熱':'stressdown','來舒效':'lysozyme','熱非非':'feverfree','毒素滅液':'toximed','速沛-L':'supermune','肝霸 散劑':'superliver','乳爽':'natura','維他強':'vitmax','益水淨':'winpond','益水清':'baka','剋黴星':'duplo','益倍佳':'easyhealth','奶師父':'enhalor','安補舒':'anprosol','腸益清 ONE':'essencial','呼益清':'eucamenth','痰舒清-L':'mucolyt','倍特耐':'betailock','益來電':'elytes','愛肥精':'agrovit','冠球-液':'cocciliq','金士勇':'metafisiol','氣立通':'respilif','速立酵':'enzylif','肝腎福':'hepatocare','百賜福':'maxifort','百喜多':'pronubi','益鈣':'calfast','益佳硒':'selenium','百禾 C':'bioherb','酸寶':'aquacid','立得妥':'reidrotonic','泛多礦':'pantosal','舒立效':'normopirex','舒勁':'electroliquid','保水力':'aanutri','綠肥':'biogreen','安寧健':'anigane','舒神':'stressen','肝勇':'hepamin','魚蝦寶':'yuccamax','肝霸 液劑':'superliquid','基能-硒 4000':'seaminox4000','剋黴靈':'keimeiling','愛快好':'aquabio','蝦寶':'q10','EM 枯草':'empure','蝦勇':'uvbasi','百福菌 200':'yakangbao','基能-鋅 15':'zinaminox','羅維礦':'lovit'};
 // 新增產品（IMG 值為空字串）還沒有圖，先用灰底占位圖；沒列在 IMG 的 NEOSTRONG 系列維持共用瓶圖
-const NOIMG = ['高棕櫚酸乳牛能量脂肪','過瘤胃棕櫚脂肪粉','基能-硒 4000'];
+const NOIMG = ['高棕櫚酸乳牛能量脂肪','過瘤胃棕櫚脂肪粉','Nutrifat Plus'];
 const PH = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="56"><rect width="40" height="56" rx="6" fill="#ece8dc"/><rect x="14" y="10" width="12" height="7" rx="2" fill="#c9c3b0"/><rect x="9" y="17" width="22" height="30" rx="5" fill="#c9c3b0"/></svg>');
 const thumb = n => NOIMG.includes(n) ? PH : 'img/' + (IMG[n] || 'neostrong') + '.webp';
 
